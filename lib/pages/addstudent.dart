@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class AddStudentPage extends StatefulWidget {
@@ -18,7 +19,6 @@ class _AddStudentPageState extends State<AddStudentPage> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     namecontrl.dispose();
     emailcontrl.dispose();
     passcontrl.dispose();
@@ -31,8 +31,16 @@ class _AddStudentPageState extends State<AddStudentPage> {
     passcontrl.clear();
   }
 
-  addUser() {
-    print('user added');
+  CollectionReference students =
+      FirebaseFirestore.instance.collection('students');
+  Future<void> addUser() {
+    return students.add(
+      {
+        'name': name,
+        'email': email,
+        'password': password,
+      },
+    );
   }
 
   @override
