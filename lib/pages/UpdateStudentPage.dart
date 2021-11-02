@@ -61,7 +61,7 @@ class _UpdateStudentPageState extends State<UpdateStudentPage> {
                           autofocus: false,
                           onChanged: (value) => name = value,
                           decoration: InputDecoration(
-                            labelText: 'Name: ',
+                            labelText: 'Name',
                             labelStyle: TextStyle(fontSize: 20.0),
                             border: OutlineInputBorder(),
                             errorStyle: TextStyle(
@@ -82,7 +82,7 @@ class _UpdateStudentPageState extends State<UpdateStudentPage> {
                           autofocus: false,
                           onChanged: (value) => email = value,
                           decoration: InputDecoration(
-                            labelText: 'Email:',
+                            labelText: 'Email',
                             labelStyle: TextStyle(fontSize: 20.0),
                             border: OutlineInputBorder(),
                             errorStyle: TextStyle(
@@ -106,7 +106,7 @@ class _UpdateStudentPageState extends State<UpdateStudentPage> {
                           onChanged: (value) => password = value,
                           obscureText: true,
                           decoration: InputDecoration(
-                            labelText: 'Password: ',
+                            labelText: 'Password',
                             labelStyle: TextStyle(fontSize: 20.0),
                             border: OutlineInputBorder(),
                             errorStyle: TextStyle(
