@@ -47,7 +47,7 @@ class _AddStudentPageState extends State<AddStudentPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Add New Student"),
+        title: Text("Fill Your Information"),
       ),
       body: Form(
         key: _formKey,
@@ -60,7 +60,7 @@ class _AddStudentPageState extends State<AddStudentPage> {
                 child: TextFormField(
                   autofocus: false,
                   decoration: InputDecoration(
-                    labelText: 'Name: ',
+                    labelText: 'Name',
                     labelStyle: TextStyle(fontSize: 20.0),
                     border: OutlineInputBorder(),
                     errorStyle:
@@ -80,18 +80,19 @@ class _AddStudentPageState extends State<AddStudentPage> {
                 child: TextFormField(
                   autofocus: false,
                   decoration: InputDecoration(
-                    labelText: 'Email: ',
+                    labelText: 'Phone Number',
                     labelStyle: TextStyle(fontSize: 20.0),
                     border: OutlineInputBorder(),
                     errorStyle:
                         TextStyle(color: Colors.redAccent, fontSize: 15),
                   ),
                   controller: emailcontrl,
+                  keyboardType: TextInputType.number,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please Enter Email';
-                    } else if (!value.contains('@')) {
-                      return 'Please Enter Valid Email';
+                      return 'Please Enter Phone Number';
+                    } else if (value.length != 10) {
+                      return 'Please Enter Valid Phone Number';
                     }
                     return null;
                   },
@@ -103,7 +104,7 @@ class _AddStudentPageState extends State<AddStudentPage> {
                   autofocus: false,
                   obscureText: true,
                   decoration: InputDecoration(
-                    labelText: 'Password: ',
+                    labelText: 'Password',
                     labelStyle: TextStyle(fontSize: 20.0),
                     border: OutlineInputBorder(),
                     errorStyle:
@@ -118,6 +119,9 @@ class _AddStudentPageState extends State<AddStudentPage> {
                   },
                 ),
               ),
+              Container(
+                  child: new Text(
+                      "To Enter the Store You need to have atlease 1 Dose of COVID-19 Vaccine")),
               Container(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -136,7 +140,7 @@ class _AddStudentPageState extends State<AddStudentPage> {
                         }
                       },
                       child: Text(
-                        'Register',
+                        'Enter',
                         style: TextStyle(fontSize: 18.0),
                       ),
                     ),

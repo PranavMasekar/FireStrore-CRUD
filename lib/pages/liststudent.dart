@@ -103,6 +103,8 @@ class _ListStudentPageState extends State<ListStudentPage> {
                         child: Center(
                           child: Text(
                             store[i]['name'],
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.center,
                             style: TextStyle(fontSize: 18),
                           ),
                         ),
@@ -111,6 +113,8 @@ class _ListStudentPageState extends State<ListStudentPage> {
                         child: Center(
                           child: Text(
                             store[i]['email'],
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.center,
                             style: TextStyle(fontSize: 18),
                           ),
                         ),
