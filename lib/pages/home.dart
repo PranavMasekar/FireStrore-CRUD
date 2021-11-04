@@ -49,6 +49,6 @@ class HomePage extends StatelessWidget {
           ),
         ),
         body: ListStudentPage(),
-        drawer: DRawer());
+        drawer: MyDrawer());
   }
 }
