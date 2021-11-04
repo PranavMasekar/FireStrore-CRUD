@@ -21,6 +21,7 @@ environment:
   sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
+  barcode_widget: ^2.0.1
   cloud_firestore: ^2.5.4
   cupertino_icons: ^1.0.2
   smart_select: ^4.3.2
@@ -29,6 +30,7 @@ dependencies:
   firebase_storage: ^10.0.6
   flutter:
     sdk: flutter
+  flutter_barcode_scanner: ^2.0.0
   flutter_signin_button: ^2.0.0
   google_sign_in: ^5.2.1
 
