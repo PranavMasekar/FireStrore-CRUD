@@ -1,7 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firestore_project/pages/QRCodeScanner.dart';
+// import 'package:firestore_project/pages/QRCodeScanner.dart';
 // import 'package:firestore_project/pages/home.dart';
-import 'package:firestore_project/pages/login.dart';
+// import 'package:firestore_project/pages/login.dart';
 import 'package:flutter/material.dart';
+
+// import 'pages/QRCodeGenerator.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,7 +32,7 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
           ),
           debugShowCheckedModeBanner: false,
-          home: LoginPage(),
+          home: QRCodeScanner(),
         );
       },
     );
