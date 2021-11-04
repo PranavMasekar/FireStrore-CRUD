@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'profilePage.dart';
 
 class DRawer extends StatelessWidget {
   @override
@@ -12,9 +13,19 @@ class DRawer extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text("Hello Ajinkya Patil "),
-              CircleAvatar(
-                backgroundColor: Colors.green.shade800,
-                child: const Text('AJ'),
+              IconButton(
+                icon: CircleAvatar(
+                  backgroundColor: Colors.green.shade800,
+                  child: const Text('AJ'),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Profile(),
+                    ),
+                  );
+                },
               )
             ],
           ),
