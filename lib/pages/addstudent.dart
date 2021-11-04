@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firestore_project/pages/home.dart';
 import 'package:flutter/material.dart';
 
 class AddStudentPage extends StatefulWidget {
@@ -140,10 +141,16 @@ class _AddStudentPageState extends State<AddStudentPage> {
                             addUser();
                             clearText();
                           });
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => HomePage(),
+                            ),
+                          );
                         }
                       },
                       child: Text(
-                        'Enter',
+                        'Submit',
                         style: TextStyle(fontSize: 18.0),
                       ),
                     ),

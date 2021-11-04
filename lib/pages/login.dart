@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firestore_project/Authentication/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:firestore_project/pages/addstudent.dart';
 import 'home.dart';
 
 class LoginPage extends StatefulWidget {
@@ -31,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => HomePage(),
+        builder: (context) => AddStudentPage(),
       ),
     );
   }
