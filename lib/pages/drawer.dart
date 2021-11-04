@@ -1,5 +1,6 @@
 import 'package:firestore_project/Authentication/auth.dart';
 import 'package:flutter/material.dart';
+import 'profilePage.dart';
 
 class MyDrawer extends StatelessWidget {
   @override

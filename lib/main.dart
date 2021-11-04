@@ -1,3 +1,5 @@
+  import 'package:firebase_core/firebase_core.dart';
+import 'package:firestore_project/pages/home.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firestore_project/pages/QRCodeScanner.dart';
 // import 'package:firestore_project/pages/QRCodeScanner.dart';
