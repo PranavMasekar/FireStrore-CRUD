@@ -50,13 +50,39 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: SignInButton(
-          Buttons.Google,
-          onPressed: () {
-            signInMethod();
-          },
-        ),
+      backgroundColor: Color(0xff89e1b1),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            child: IconButton(
+                onPressed: () => {},
+                iconSize: 30,
+                icon: Icon(
+                  Icons.login,
+                  color: Colors.white,
+                )),
+          ),
+          Container(
+            child: Text("Hi\nTo Continue, Register First",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    color: Color(0xffffffff),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25)),
+          ),
+          Center(
+            child: SignInButton(
+              Buttons.Google,
+              shape: new RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(5.0),
+              ),
+              onPressed: () {
+                signInMethod();
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

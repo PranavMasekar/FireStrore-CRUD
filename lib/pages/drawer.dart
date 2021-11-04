@@ -6,12 +6,12 @@ import 'profilePage.dart';
 class MyDrawer extends StatelessWidget {
   signOutMethod() async {
     await signout();
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => LoginPage(),
-      ),
-    );
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(
+    //     builder: (context) => LoginPage(),
+    //   ),
+    // );
   }
 
   @override

@@ -122,7 +122,7 @@ class _AddStudentPageState extends State<AddStudentPage> {
               ),
               Container(
                 child: new Text(
-                  "To Enter the Store You need to have atlease 1 Dose of COVID-19 Vaccine",
+                  "To Enter the Store you need to have atlease 1 Dose of COVID-19 Vaccine",
                   style: TextStyle(color: Colors.red.withOpacity(1)),
                 ),
               ),
