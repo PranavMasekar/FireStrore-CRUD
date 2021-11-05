@@ -14,7 +14,7 @@ class _AddStudentPageState extends State<AddStudentPage> {
   var email = "";
   var password = "";
 
-  final namecontrl = TextEditingController();
+  final namecontrl = TextEditingController(text: "Email Se Naam");
   final emailcontrl = TextEditingController();
   final passcontrl = TextEditingController();
 
@@ -164,7 +164,26 @@ class _AddStudentPageState extends State<AddStudentPage> {
                     ),
                   ],
                 ),
-              )
+              ),
+              Container(
+                  child: Column(children: [
+                Text("Only For Devlopers !!"),
+                ElevatedButton(
+                  onPressed: () => {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => HomePage(),
+                      ),
+                    )
+                  },
+                  child: Text(
+                    'PASS',
+                    style: TextStyle(fontSize: 18.0),
+                  ),
+                  style: ElevatedButton.styleFrom(primary: Colors.red),
+                ),
+              ]))
             ],
           ),
         ),

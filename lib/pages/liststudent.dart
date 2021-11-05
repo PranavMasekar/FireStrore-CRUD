@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firestore_project/pages/QRCodeScanner.dart';
 import 'UpdateStudentPage.dart';
-
+import './QRCodeGenerator.dart';
 class ListStudentPage extends StatefulWidget {
   @override
   _ListStudentPageState createState() => _ListStudentPageState();
@@ -19,6 +19,8 @@ class _ListStudentPageState extends State<ListStudentPage> {
         .delete()
         .catchError((error) => print("Failed to delete user"));
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -42,140 +44,161 @@ class _ListStudentPageState extends State<ListStudentPage> {
         return ListView(
           children: [
             Container(
-              child: ElevatedButton(
-                onPressed: () => {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => QRCodeScanner(),
-                    ),
-                  )
-                },
-                child: Text(
-                  'Scan QR Code',
-                  style: TextStyle(fontSize: 18.0),
+              child: Center(
+                child: ElevatedButton(
+                  onPressed: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => QRCodeScanner(),
+                      ),
+                    )
+                  },
+                  child: Text(
+                    'Scan QR Code',
+                    style: TextStyle(fontSize: 18.0),
+                  ),
+                  style: ElevatedButton.styleFrom(primary: Colors.blue),
                 ),
-                style: ElevatedButton.styleFrom(primary: Colors.blue),
               ),
             ),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Table(
-                  border: TableBorder.all(),
-                  columnWidths: const <int, TableColumnWidth>{
-                    1: FixedColumnWidth(140),
-                  },
-                  defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-                  children: [
-                    TableRow(
-                      children: [
-                        TableCell(
-                          child: Container(
-                            color: Colors.greenAccent,
-                            child: Center(
-                              child: Text(
-                                'Name',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        TableCell(
-                          child: Container(
-                            color: Colors.greenAccent,
-                            child: Center(
-                              child: Text(
-                                'Email',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        TableCell(
-                          child: Container(
-                            color: Colors.greenAccent,
-                            child: Center(
-                              child: Text(
-                                'Action',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    for (var i = 0; i < store.length; i++) ...[
-                      TableRow(
-                        children: [
-                          TableCell(
-                            child: Center(
-                              child: Text(
-                                store[i]['name'],
-                                overflow: TextOverflow.ellipsis,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: 18),
-                              ),
-                            ),
-                          ),
-                          TableCell(
-                            child: Center(
-                              child: Text(
-                                store[i]['email'],
-                                overflow: TextOverflow.ellipsis,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: 18),
-                              ),
-                            ),
-                          ),
-                          TableCell(
-                              child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              IconButton(
-                                onPressed: () => {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          UpdateStudentPage(id: store[i]['id']),
-                                    ),
-                                  ),
-                                },
-                                icon: Icon(
-                                  Icons.edit,
-                                  color: Colors.orange,
-                                ),
-                              ),
-                              IconButton(
-                                  onPressed: () => {
-                                        deleteUser(
-                                          store[i]['id'],
-                                        ),
-                                      },
-                                  icon: Icon(
-                                    Icons.delete,
-                                    color: Colors.red,
-                                  ))
-                            ],
-                          ))
-                        ],
+              child: Center(
+                child: ElevatedButton(
+                  onPressed: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => QRCodeGenerator(),
                       ),
-                    ],
-                  ],
+                    )
+                  },
+                  child: Text(
+                    'Create QR Code',
+                    style: TextStyle(fontSize: 18.0),
+                  ),
+                  style: ElevatedButton.styleFrom(primary: Colors.blue),
                 ),
               ),
             ),
+            // Container(
+            //   margin: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+            //   child: SingleChildScrollView(
+            //     scrollDirection: Axis.vertical,
+            //     child: Table(
+            //       border: TableBorder.all(),
+            //       columnWidths: const <int, TableColumnWidth>{
+            //         1: FixedColumnWidth(140),
+            //       },
+            //       defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+            //       children: [
+            //         TableRow(
+            //           children: [
+            //             TableCell(
+            //               child: Container(
+            //                 color: Colors.greenAccent,
+            //                 child: Center(
+            //                   child: Text(
+            //                     'Name',
+            //                     style: TextStyle(
+            //                       fontSize: 20,
+            //                       fontWeight: FontWeight.bold,
+            //                     ),
+            //                   ),
+            //                 ),
+            //               ),
+            //             ),
+            //             TableCell(
+            //               child: Container(
+            //                 color: Colors.greenAccent,
+            //                 child: Center(
+            //                   child: Text(
+            //                     'Email',
+            //                     style: TextStyle(
+            //                       fontSize: 20,
+            //                       fontWeight: FontWeight.bold,
+            //                     ),
+            //                   ),
+            //                 ),
+            //               ),
+            //             ),
+            //             TableCell(
+            //               child: Container(
+            //                 color: Colors.greenAccent,
+            //                 child: Center(
+            //                   child: Text(
+            //                     'Action',
+            //                     style: TextStyle(
+            //                       fontSize: 20,
+            //                       fontWeight: FontWeight.bold,
+            //                     ),
+            //                   ),
+            //                 ),
+            //               ),
+            //             ),
+            //           ],
+            //         ),
+            //         for (var i = 0; i < store.length; i++) ...[
+            //           TableRow(
+            //             children: [
+            //               TableCell(
+            //                 child: Center(
+            //                   child: Text(
+            //                     store[i]['name'],
+            //                     overflow: TextOverflow.ellipsis,
+            //                     textAlign: TextAlign.center,
+            //                     style: TextStyle(fontSize: 18),
+            //                   ),
+            //                 ),
+            //               ),
+            //               TableCell(
+            //                 child: Center(
+            //                   child: Text(
+            //                     store[i]['email'],
+            //                     overflow: TextOverflow.ellipsis,
+            //                     textAlign: TextAlign.center,
+            //                     style: TextStyle(fontSize: 18),
+            //                   ),
+            //                 ),
+            //               ),
+            //               TableCell(
+            //                   child: Row(
+            //                 mainAxisAlignment: MainAxisAlignment.center,
+            //                 children: [
+            //                   IconButton(
+            //                     onPressed: () => {
+            //                       Navigator.push(
+            //                         context,
+            //                         MaterialPageRoute(
+            //                           builder: (context) =>
+            //                               UpdateStudentPage(id: store[i]['id']),
+            //                         ),
+            //                       ),
+            //                     },
+            //                     icon: Icon(
+            //                       Icons.edit,
+            //                       color: Colors.orange,
+            //                     ),
+            //                   ),
+            //                   IconButton(
+            //                       onPressed: () => {
+            //                             deleteUser(
+            //                               store[i]['id'],
+            //                             ),
+            //                           },
+            //                       icon: Icon(
+            //                         Icons.delete,
+            //                         color: Colors.red,
+            //                       ))
+            //                 ],
+            //               ))
+            //             ],
+            //           ),
+            //         ],
+            //       ],
+            //     ),
+            //   ),
+            // ),
           ],
         );
       },

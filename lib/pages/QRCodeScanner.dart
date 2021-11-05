@@ -17,17 +17,17 @@ class _QRCodeScannerState extends State<QRCodeScanner> {
         true,
         ScanMode.QR,
       );
-      if (!mounted) {
+      if (mounted) {
         setState(() {
           qrcode = qrCode;
           scanned = true;
         });
-        print(scanned);
       }
     } on Error {
       qrcode = 'Failed To Scan';
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
