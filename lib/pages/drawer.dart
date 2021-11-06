@@ -17,20 +17,21 @@ class MyDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(children: [
+      child: ListView(
+        children: [
         Container(
           child: Column(
             children: [
               Padding(
                 padding: const EdgeInsets.fromLTRB(10, 30, 10, 10),
-                child: Row(
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Hello $name "),
                     CircleAvatar(
-                      backgroundColor: Colors.green.shade800,
-                      child: Image.network(imgurl),
+                      radius: 50,
+                      backgroundImage: NetworkImage("https://picsum.photos/200/200"),
                     ),
+                    Text("Hello $name "),
                   ],
                 ),
               ),

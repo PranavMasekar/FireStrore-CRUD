@@ -18,9 +18,9 @@ class Profile extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Container(
                 child: CircleAvatar(
-                  backgroundColor: Color(0xffff0000),
+                  backgroundImage:
+                      NetworkImage("https://picsum.photos/1000/1000"),
                   radius: 50,
-                  child: const Text('AJ'),
                 ),
               ),
             ),

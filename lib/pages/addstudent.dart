@@ -47,7 +47,9 @@ class _AddStudentPageState extends State<AddStudentPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xff1e192e),
       appBar: AppBar(
+        backgroundColor: Color(0xff372e4a),
         title: Text("Fill Your Information"),
       ),
       body: Form(
@@ -59,10 +61,15 @@ class _AddStudentPageState extends State<AddStudentPage> {
               Container(
                 margin: EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
+                  style: TextStyle(color: Colors.white),
                   autofocus: false,
                   decoration: InputDecoration(
                     labelText: 'Name',
-                    labelStyle: TextStyle(fontSize: 20.0),
+                    labelStyle: TextStyle(fontSize: 20.0, color: Colors.grey),
+                    enabledBorder: const OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(color: Colors.grey, width: 0.0),
+                    ),
                     border: OutlineInputBorder(),
                     errorStyle:
                         TextStyle(color: Colors.redAccent, fontSize: 15),
@@ -79,10 +86,15 @@ class _AddStudentPageState extends State<AddStudentPage> {
               Container(
                 margin: EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
+                  style: TextStyle(color: Colors.white),
                   autofocus: false,
                   decoration: InputDecoration(
                     labelText: 'Phone Number',
-                    labelStyle: TextStyle(fontSize: 20.0),
+                    labelStyle: TextStyle(fontSize: 20.0, color: Colors.grey),
+                    enabledBorder: const OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(color: Colors.grey, width: 0.0),
+                    ),
                     border: OutlineInputBorder(),
                     errorStyle:
                         TextStyle(color: Colors.redAccent, fontSize: 15),
@@ -102,11 +114,16 @@ class _AddStudentPageState extends State<AddStudentPage> {
               Container(
                 margin: EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
+                  style: TextStyle(color: Colors.white),
                   autofocus: false,
                   obscureText: true,
                   decoration: InputDecoration(
                     labelText: 'Password',
-                    labelStyle: TextStyle(fontSize: 20.0),
+                    labelStyle: TextStyle(fontSize: 20.0, color: Colors.grey),
+                    enabledBorder: const OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(color: Colors.grey, width: 0.0),
+                    ),
                     border: OutlineInputBorder(),
                     errorStyle:
                         TextStyle(color: Colors.redAccent, fontSize: 15),

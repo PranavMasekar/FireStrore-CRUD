@@ -13,18 +13,23 @@ class _QRCodeGeneratorState extends State<QRCodeGenerator> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.withOpacity(0.5),
+      backgroundColor: Color(0xff1e192e),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            BarcodeWidget(
-              barcode: Barcode.qrCode(),
-              color: Colors.white,
-              data: controller.text,
-              width: 200,
-              height: 200,
-            ),
+            controller.text == ""
+                ? Text(
+                    "Add The Name of the Hotel",
+                    style: TextStyle(color: Colors.white),
+                  )
+                : BarcodeWidget(
+                    barcode: Barcode.qrCode(),
+                    color: Colors.white,
+                    data: controller.text,
+                    width: 200,
+                    height: 200,
+                  ),
             SizedBox(
               height: 40,
             ),
