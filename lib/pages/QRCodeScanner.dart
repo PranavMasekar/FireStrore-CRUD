@@ -7,25 +7,21 @@ class QRCodeScanner extends StatefulWidget {
 }
 
 class _QRCodeScannerState extends State<QRCodeScanner> {
-  late String qrcode;
+  String qrdata = '';
   bool scanned = false;
+
   Future<void> scanQRCode() async {
-    try {
-      final qrCode = await FlutterBarcodeScanner.scanBarcode(
-        '#ff6666',
-        'Cancel',
-        true,
-        ScanMode.QR,
-      );
-      if (!mounted) {
-        setState(() {
-          qrcode = qrCode;
-          scanned = true;
-        });
-        print(scanned);
-      }
-    } on Error {
-      qrcode = 'Failed To Scan';
+    qrdata = await FlutterBarcodeScanner.scanBarcode(
+      '#ff6666',
+      'Cancel',
+      true,
+      ScanMode.QR,
+    );
+    print(qrdata);
+    if (qrdata != '') {
+      setState(() {
+        scanned = true;
+      });
     }
   }
 
@@ -53,7 +49,7 @@ class _QRCodeScannerState extends State<QRCodeScanner> {
             ),
           ),
           Container(
-            child: scanned ? Text(qrcode) : Text('Not done'),
+            child: scanned ? Text(qrdata) : Text('Not done'),
           )
         ],
       ),
