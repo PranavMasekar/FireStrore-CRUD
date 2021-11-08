@@ -120,56 +120,40 @@ class _ListStudentPageState extends State<ListStudentPage> {
                   ],
                 ),
               ),
-              Container(
-                  child: scanned && qrcode != "-1"
-                      ? Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: Column(
-                            children: [
-                              Text("Store Name: " + qrcode,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 20)),
-                              SizedBox(height: 20),
-                              Container(
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    ElevatedButton(
-                                      onPressed: () => {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => VisitStore(),
-                                          ),
-                                        )
-                                      },
-                                      child: Text(
-                                        'Visit The Store',
-                                        style: TextStyle(
-                                            fontSize: 18.0,
-                                            color: Colors.black),
-                                      ),
-                                      style: ElevatedButton.styleFrom(
-                                        primary: Color(0xff0cecda),
-                                        shape: new RoundedRectangleBorder(
-                                          borderRadius:
-                                              new BorderRadius.circular(30.0),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 150,
-                                      child: ElevatedButton(
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey, width: 0.0),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: scanned && qrcode != "-1"
+                        ? Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Column(
+                              children: [
+                                Text("Store Name: " + qrcode,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 20)),
+                                SizedBox(height: 20),
+                                Container(
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      ElevatedButton(
                                         onPressed: () => {
-                                          setState(() {
-                                            qrcode = "";
-                                            scanned = false;
-                                          })
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  VisitStore(store: qrcode),
+                                            ),
+                                          )
                                         },
                                         child: Text(
-                                          'Cancel',
+                                          'Visit The Store',
                                           style: TextStyle(
                                               fontSize: 18.0,
                                               color: Colors.black),
@@ -182,14 +166,39 @@ class _ListStudentPageState extends State<ListStudentPage> {
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                        )
-                      : SizedBox()),
+                                      SizedBox(
+                                        width: 150,
+                                        child: ElevatedButton(
+                                          onPressed: () => {
+                                            setState(() {
+                                              qrcode = "";
+                                              scanned = false;
+                                            })
+                                          },
+                                          child: Text(
+                                            'Cancel',
+                                            style: TextStyle(
+                                                fontSize: 18.0,
+                                                color: Colors.black),
+                                          ),
+                                          style: ElevatedButton.styleFrom(
+                                            primary: Color(0xff0cecda),
+                                            shape: new RoundedRectangleBorder(
+                                              borderRadius:
+                                                  new BorderRadius.circular(
+                                                      30.0),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
+                        : SizedBox()),
+              ),
 
               // Container(
               //   margin: EdgeInsets.symmetric(horizontal: 10, vertical: 20),

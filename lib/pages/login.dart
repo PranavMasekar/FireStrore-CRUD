@@ -233,7 +233,7 @@ class _LoginPageState extends State<LoginPage> {
                                 Column(
                                   children: [
                                     Container(
-                                        child: Text(" Lower Risk Factor",
+                                        child: Text(" User Friendly",
                                             style: TextStyle(
                                                 color: Color(0xffffffff),
                                                 fontSize: 15))),
@@ -244,7 +244,7 @@ class _LoginPageState extends State<LoginPage> {
                                       onPressed: () => {},
                                       iconSize: 20,
                                       icon: Icon(
-                                        Icons.sanitizer,
+                                        Icons.phone_android,
                                         color: Colors.grey,
                                       )),
                                 ),
@@ -270,7 +270,7 @@ class _LoginPageState extends State<LoginPage> {
                                 Column(
                                   children: [
                                     Container(
-                                        child: Text(" Lower Risk Factor",
+                                        child: Text(" Saves Your Time",
                                             style: TextStyle(
                                                 color: Color(0xffffffff),
                                                 fontSize: 15))),
@@ -281,7 +281,7 @@ class _LoginPageState extends State<LoginPage> {
                                       onPressed: () => {},
                                       iconSize: 20,
                                       icon: Icon(
-                                        Icons.sanitizer,
+                                        Icons.timer,
                                         color: Colors.grey,
                                       )),
                                 ),
