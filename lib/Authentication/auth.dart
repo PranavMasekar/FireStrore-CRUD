@@ -41,7 +41,7 @@ Future<User?> signin() async {
     //checking currentuser is same as user we created
     final User? currentuser = _auth.currentUser;
     assert(currentuser!.uid == user!.uid);
-    // print(user);
+    print(user);
     return user;
   } catch (e) {
     print(e);

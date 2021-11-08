@@ -1,5 +1,7 @@
+import 'package:firestore_project/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:barcode_widget/barcode_widget.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class QRCodeGenerator extends StatefulWidget {
   @override
@@ -11,18 +13,23 @@ class _QRCodeGeneratorState extends State<QRCodeGenerator> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.withOpacity(0.5),
+      backgroundColor: Color(0xff1e192e),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            BarcodeWidget(
-              barcode: Barcode.qrCode(),
-              color: Colors.white,
-              data: controller.text,
-              width: 200,
-              height: 200,
-            ),
+            controller.text == ""
+                ? Text(
+                    "Add The Name of the Hotel",
+                    style: TextStyle(color: Colors.white),
+                  )
+                : BarcodeWidget(
+                    barcode: Barcode.qrCode(),
+                    color: Colors.white,
+                    data: controller.text,
+                    width: 200,
+                    height: 200,
+                  ),
             SizedBox(
               height: 40,
             ),
@@ -34,6 +41,9 @@ class _QRCodeGeneratorState extends State<QRCodeGenerator> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: TextFormField(
+                        onChanged: (_) => setState(
+                          () {},
+                        ),
                         autofocus: false,
                         style: TextStyle(
                           color: Colors.white,
@@ -57,9 +67,14 @@ class _QRCodeGeneratorState extends State<QRCodeGenerator> {
                 ),
                 FloatingActionButton(
                   backgroundColor: Colors.blue,
-                  onPressed: () => setState(
-                    () {},
-                  ),
+                  onPressed: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => HomePage(),
+                      ),
+                    )
+                  },
                   child: Icon(Icons.check),
                 ),
               ],

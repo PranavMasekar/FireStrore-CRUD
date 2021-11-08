@@ -9,14 +9,14 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xff372e4a),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text('App ka Naam'),
             IconButton(
               icon: CircleAvatar(
-                backgroundColor: Colors.green.shade800,
-                child: const Text('AJ'),
+                backgroundImage: NetworkImage("https://picsum.photos/200/200"),
               ),
               onPressed: () {
                 Navigator.push(
