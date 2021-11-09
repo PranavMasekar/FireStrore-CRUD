@@ -1,7 +1,7 @@
 import 'package:firestore_project/Authentication/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firestore_project/pages/login.dart';
-import 'profilePage.dart';
+// import 'profilePage.dart';
 
 class MyDrawer extends StatelessWidget {
   signOutMethod(context) async {
@@ -17,8 +17,7 @@ class MyDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(
-        children: [
+      child: ListView(children: [
         Container(
           child: Column(
             children: [
@@ -29,7 +28,7 @@ class MyDrawer extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: 50,
-                      backgroundImage: NetworkImage("https://picsum.photos/200/200"),
+                      backgroundImage: NetworkImage(imgurl),
                     ),
                     Text("Hello $name "),
                   ],
@@ -40,7 +39,9 @@ class MyDrawer extends StatelessWidget {
         ),
         Container(
           child: ElevatedButton(
-            onPressed: () => {print("Logout")},
+            onPressed: () => {
+              signOutMethod(context),
+            },
             child: Text(
               'Logout',
               style: TextStyle(fontSize: 18.0, color: Colors.black),

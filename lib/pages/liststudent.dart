@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:firestore_project/pages/QRCodeScanner.dart';
+// import 'package:firestore_project/pages/QRCodeScanner.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'VisitStore.dart';
-import 'UpdateStudentPage.dart';
+// import 'UpdateStudentPage.dart';
 import './QRCodeGenerator.dart';
 
 class ListStudentPage extends StatefulWidget {

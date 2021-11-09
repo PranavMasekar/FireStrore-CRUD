@@ -1,3 +1,4 @@
+import 'package:firestore_project/Authentication/auth.dart';
 import 'package:flutter/material.dart';
 
 class Profile extends StatelessWidget {
@@ -20,15 +21,14 @@ class Profile extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Container(
                 child: CircleAvatar(
-                  backgroundImage:
-                      NetworkImage("https://picsum.photos/1000/1000"),
+                  backgroundImage: NetworkImage(imgurl),
                   radius: 50,
                 ),
               ),
             ),
             Center(
                 child: new Text(
-              "Ajinkya Patil",
+              name,
               style: (TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
