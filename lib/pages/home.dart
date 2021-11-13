@@ -27,25 +27,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xff372e4a),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text('App ka Naam'),
-            IconButton(
-              icon: CircleAvatar(
-                backgroundImage: NetworkImage(imgurl),
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Profile(),
-                  ),
-                );
-              },
-            )
-          ],
-        ),
+        title: Text('Safe Restro'),
       ),
       body: ListStudentPage(),
       drawer: MyDrawer(),

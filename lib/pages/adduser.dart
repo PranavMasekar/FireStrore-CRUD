@@ -2,19 +2,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firestore_project/pages/home.dart';
 import 'package:flutter/material.dart';
 
-class AddStudentPage extends StatefulWidget {
+class AddUser extends StatefulWidget {
   @override
-  _AddStudentPageState createState() => _AddStudentPageState();
+  _AddUserState createState() => _AddUserState();
 }
 
-class _AddStudentPageState extends State<AddStudentPage> {
+class _AddUserState extends State<AddUser> {
   final _formKey = GlobalKey<FormState>();
 
   var name = "";
   var email = "";
   var password = "";
 
-  final namecontrl = TextEditingController(text: "Email Se Naam");
+  final namecontrl = TextEditingController();
   final emailcontrl = TextEditingController();
   final passcontrl = TextEditingController();
 

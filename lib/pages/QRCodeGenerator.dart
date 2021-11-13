@@ -1,7 +1,7 @@
-import 'package:firestore_project/pages/home.dart';
+// import 'package:firestore_project/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:barcode_widget/barcode_widget.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
 
 class QRCodeGenerator extends StatefulWidget {
   @override
@@ -65,18 +65,18 @@ class _QRCodeGeneratorState extends State<QRCodeGenerator> {
                 SizedBox(
                   width: 12,
                 ),
-                FloatingActionButton(
-                  backgroundColor: Colors.blue,
-                  onPressed: () => {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => HomePage(),
-                      ),
-                    )
-                  },
-                  child: Icon(Icons.check),
-                ),
+                // FloatingActionButton(
+                //   backgroundColor: Colors.blue,
+                //   onPressed: () => {
+                //     Navigator.push(
+                //       context,
+                //       MaterialPageRoute(
+                //         builder: (context) => HomePage(),
+                //       ),
+                //     )
+                //   },
+                //   child: Icon(Icons.check),
+                // ),
               ],
             )
           ],
