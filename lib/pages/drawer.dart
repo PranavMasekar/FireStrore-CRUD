@@ -1,7 +1,8 @@
 import 'package:firestore_project/Authentication/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firestore_project/pages/login.dart';
-// import 'profilePage.dart';
+import '../Components/Button.dart';
+import 'profilePage.dart';
 
 class MyDrawer extends StatelessWidget {
   signOutMethod(context) async {
@@ -18,17 +19,28 @@ class MyDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Drawer(
-        backgroundColor: Color(0xff372e4a),
+        // backgroundColor: Color(0xff372e4a),
         child: Container(
+          color: Color(0xff372e4a),
           padding: EdgeInsets.all(15),
           height: MediaQuery.of(context).size.height,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CircleAvatar(
-                radius: 50,
-                backgroundImage: NetworkImage(imgurl),
+              GestureDetector(
+                onTap: () => {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Profile(),
+                    ),
+                  ),
+                },
+                child: CircleAvatar(
+                  radius: 50,
+                  backgroundImage: NetworkImage(imgurl),
+                ),
               ),
               SizedBox(
                 height: 15,
@@ -53,16 +65,7 @@ class MyDrawer extends StatelessWidget {
               SizedBox(
                 height: 15,
               ),
-              ElevatedButton(
-                onPressed: () => {
-                  signOutMethod(context),
-                },
-                child: Text(
-                  'Logout',
-                  style: TextStyle(fontSize: 18.0, color: Colors.black),
-                ),
-                style: ElevatedButton.styleFrom(primary: Colors.white),
-              )
+              Button2(title: "Logout", press: () => signOutMethod(context))
             ],
           ),
         ),

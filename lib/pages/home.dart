@@ -15,11 +15,14 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    final FirebaseAuth auth = FirebaseAuth.instance;
-    final user = auth.currentUser;
-    name = user!.displayName.toString();
-    email = user.email.toString();
-    imgurl = user.photoURL.toString();
+    // final FirebaseAuth auth = FirebaseAuth.instance;
+    // final user = auth.currentUser;
+    // name = user!.displayName.toString();
+    // email = user.email.toString();
+    // imgurl = user.photoURL.toString();
+    name = "Ajinkya";
+    email = "ac.efg.com";
+    imgurl = "https://picsum.photos/200/300";
   }
 
   @override
@@ -27,7 +30,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xff372e4a),
-        title: Text('Safe Restro'),
+        title: Text('Shotro App'),
       ),
       body: ListStudentPage(),
       drawer: MyDrawer(),

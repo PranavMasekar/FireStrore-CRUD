@@ -7,6 +7,7 @@ import 'VisitStore.dart';
 // import 'UpdateStudentPage.dart';
 import './QRCodeGenerator.dart';
 import 'adduser.dart';
+import '../Components/Button.dart';
 
 class ListStudentPage extends StatefulWidget {
   @override
@@ -41,20 +42,8 @@ class _ListStudentPageState extends State<ListStudentPage> {
           scanned = true;
         });
       }
-      redirect();
     } on Error {
       qrcode = 'Failed To Scan';
-    }
-  }
-
-  void redirect() {
-    if (scanned == true) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => AddUser(),
-        ),
-      );
     }
   }
 
@@ -81,50 +70,20 @@ class _ListStudentPageState extends State<ListStudentPage> {
         return Container(
           color: Color(0xff1e192e),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Container(
-                child: Center(
-                  child: ElevatedButton(
-                    onPressed: () => {
-                      scanQRCode(),
-                    },
-                    child: Text(
-                      'Scan QR Code',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      primary: Color(0xff0cecda),
-                      shape: new RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(30.0),
-                      ),
+              Column(
+                children: [
+                  Center(
+                    child: Button(
+                      title: "Scan QR Code",
+                      press: () => scanQRCode(),
                     ),
                   ),
-                ),
-              ),
-              Container(
-                child: Center(
-                  child: ElevatedButton(
-                    onPressed: () => {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => QRCodeGenerator(),
-                        ),
-                      )
-                    },
-                    child: Text(
-                      'Create QR Code',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      primary: Color(0xff0cecda),
-                      shape: new RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(30.0),
-                      ),
-                    ),
-                  ),
-                ),
+                  Center(
+                      child: Button(
+                          title: 'Create QR Code', push: QRCodeGenerator())),
+                ],
               ),
               Padding(
                 padding: const EdgeInsets.all(10.0),
@@ -150,54 +109,19 @@ class _ListStudentPageState extends State<ListStudentPage> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
                                     children: [
-                                      ElevatedButton(
-                                        onPressed: () => {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  VisitStore(store: qrcode),
-                                            ),
-                                          )
-                                        },
-                                        child: Text(
-                                          'Visit The Store',
-                                          style: TextStyle(
-                                              fontSize: 18.0,
-                                              color: Colors.black),
-                                        ),
-                                        style: ElevatedButton.styleFrom(
-                                          primary: Color(0xff0cecda),
-                                          shape: new RoundedRectangleBorder(
-                                            borderRadius:
-                                                new BorderRadius.circular(30.0),
-                                          ),
-                                        ),
-                                      ),
+                                      Button(
+                                          title: 'Visit The Store',
+                                          push: VisitStore(store: qrcode)),
                                       SizedBox(
-                                        width: 150,
-                                        child: ElevatedButton(
-                                          onPressed: () => {
-                                            setState(() {
-                                              qrcode = "";
-                                              scanned = false;
-                                            })
-                                          },
-                                          child: Text(
-                                            'Cancel',
-                                            style: TextStyle(
-                                                fontSize: 18.0,
-                                                color: Colors.black),
-                                          ),
-                                          style: ElevatedButton.styleFrom(
-                                            primary: Color(0xff0cecda),
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(30.0),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
+                                          width: 150,
+                                          child: Button(
+                                              title: 'Cancel',
+                                              press: () => {
+                                                    setState(() {
+                                                      qrcode = "";
+                                                      scanned = false;
+                                                    })
+                                                  })),
                                     ],
                                   ),
                                 )
@@ -206,125 +130,6 @@ class _ListStudentPageState extends State<ListStudentPage> {
                           )
                         : SizedBox()),
               ),
-
-              // Container(
-              //   margin: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-              //   child: SingleChildScrollView(
-              //     scrollDirection: Axis.vertical,
-              //     child: Table(
-              //       border: TableBorder.all(),
-              //       columnWidths: const <int, TableColumnWidth>{
-              //         1: FixedColumnWidth(140),
-              //       },
-              //       defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-              //       children: [
-              //         TableRow(
-              //           children: [
-              //             TableCell(
-              //               child: Container(
-              //                 color: Colors.greenAccent,
-              //                 child: Center(
-              //                   child: Text(
-              //                     'Name',
-              //                     style: TextStyle(
-              //                       fontSize: 20,
-              //                       fontWeight: FontWeight.bold,
-              //                     ),
-              //                   ),
-              //                 ),
-              //               ),
-              //             ),
-              //             TableCell(
-              //               child: Container(
-              //                 color: Colors.greenAccent,
-              //                 child: Center(
-              //                   child: Text(
-              //                     'Email',
-              //                     style: TextStyle(
-              //                       fontSize: 20,
-              //                       fontWeight: FontWeight.bold,
-              //                     ),
-              //                   ),
-              //                 ),
-              //               ),
-              //             ),
-              //             TableCell(
-              //               child: Container(
-              //                 color: Colors.greenAccent,
-              //                 child: Center(
-              //                   child: Text(
-              //                     'Action',
-              //                     style: TextStyle(
-              //                       fontSize: 20,
-              //                       fontWeight: FontWeight.bold,
-              //                     ),
-              //                   ),
-              //                 ),
-              //               ),
-              //             ),
-              //           ],
-              //         ),
-              //         for (var i = 0; i < store.length; i++) ...[
-              //           TableRow(
-              //             children: [
-              //               TableCell(
-              //                 child: Center(
-              //                   child: Text(
-              //                     store[i]['name'],
-              //                     overflow: TextOverflow.ellipsis,
-              //                     textAlign: TextAlign.center,
-              //                     style: TextStyle(fontSize: 18),
-              //                   ),
-              //                 ),
-              //               ),
-              //               TableCell(
-              //                 child: Center(
-              //                   child: Text(
-              //                     store[i]['email'],
-              //                     overflow: TextOverflow.ellipsis,
-              //                     textAlign: TextAlign.center,
-              //                     style: TextStyle(fontSize: 18),
-              //                   ),
-              //                 ),
-              //               ),
-              //               TableCell(
-              //                   child: Row(
-              //                 mainAxisAlignment: MainAxisAlignment.center,
-              //                 children: [
-              //                   IconButton(
-              //                     onPressed: () => {
-              //                       Navigator.push(
-              //                         context,
-              //                         MaterialPageRoute(
-              //                           builder: (context) =>
-              //                               UpdateStudentPage(id: store[i]['id']),
-              //                         ),
-              //                       ),
-              //                     },
-              //                     icon: Icon(
-              //                       Icons.edit,
-              //                       color: Colors.orange,
-              //                     ),
-              //                   ),
-              //                   IconButton(
-              //                       onPressed: () => {
-              //                             deleteUser(
-              //                               store[i]['id'],
-              //                             ),
-              //                           },
-              //                       icon: Icon(
-              //                         Icons.delete,
-              //                         color: Colors.red,
-              //                       ))
-              //                 ],
-              //               ))
-              //             ],
-              //           ),
-              //         ],
-              //       ],
-              //     ),
-              //   ),
-              // ),
             ],
           ),
         );

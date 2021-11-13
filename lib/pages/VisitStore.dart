@@ -1,5 +1,6 @@
 import 'package:firestore_project/pages/home.dart';
 import 'package:flutter/material.dart';
+import '../Components/Button.dart';
 
 class VisitStore extends StatelessWidget {
   final count = 5;
@@ -37,43 +38,11 @@ class VisitStore extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: ElevatedButton(
-                  onPressed: () => {},
-                  child: Text(
-                    'Stay in Queue',
-                    style: TextStyle(fontSize: 18.0, color: Colors.black),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    primary: Color(0xff0cecda),
-                    shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(30.0),
-                    ),
-                  ),
-                ),
+                child: Button(title: "Stay in Queue"),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ElevatedButton(
-                  onPressed: () => {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => HomePage(),
-                      ),
-                    ),
-                  },
-                  child: Text(
-                    'Leave the Queue',
-                    style: TextStyle(fontSize: 18.0, color: Colors.black),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    primary: Color(0xff0cecda),
-                    shape: new RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(30.0),
-                    ),
-                  ),
-                ),
-              ),
+                  padding: const EdgeInsets.all(8.0),
+                  child: Button(title: "Leave the Queue", push: HomePage())),
             ],
           )
         ],
