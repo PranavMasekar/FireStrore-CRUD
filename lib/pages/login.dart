@@ -77,12 +77,12 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
           ListView(
-            scrollDirection: Axis.vertical,
+            // scrollDirection: Axis.vertical,
             children: [
               Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Padding(
                         padding: EdgeInsets.fromLTRB(20, 40, 20, 5),
