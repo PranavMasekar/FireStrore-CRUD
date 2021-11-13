@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:firestore_project/pages/profilePage.dart';
 import 'package:flutter/material.dart';
 // import 'package:firestore_project/pages/QRCodeScanner.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'VisitStore.dart';
 // import 'UpdateStudentPage.dart';
 import './QRCodeGenerator.dart';
+import 'adduser.dart';
 
 class ListStudentPage extends StatefulWidget {
   @override
@@ -39,8 +41,20 @@ class _ListStudentPageState extends State<ListStudentPage> {
           scanned = true;
         });
       }
+      redirect();
     } on Error {
       qrcode = 'Failed To Scan';
+    }
+  }
+
+  void redirect() {
+    if (scanned == true) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => AddUser(),
+        ),
+      );
     }
   }
 
@@ -67,57 +81,49 @@ class _ListStudentPageState extends State<ListStudentPage> {
         return Container(
           color: Color(0xff1e192e),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Container(
-                      child: Center(
-                        child: ElevatedButton(
-                          onPressed: () => {scanQRCode()},
-                          child: Text(
-                            'Scan QR Code',
-                            style:
-                                TextStyle(fontSize: 18.0, color: Colors.black),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            primary: Color(0xff0cecda),
-                            shape: new RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(30.0),
-                            ),
-                          ),
-                        ),
+              Container(
+                child: Center(
+                  child: ElevatedButton(
+                    onPressed: () => {
+                      scanQRCode(),
+                    },
+                    child: Text(
+                      'Scan QR Code',
+                      style: TextStyle(fontSize: 18.0, color: Colors.black),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      primary: Color(0xff0cecda),
+                      shape: new RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(30.0),
                       ),
                     ),
-                    Container(
-                      child: Center(
-                        child: ElevatedButton(
-                          onPressed: () => {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => QRCodeGenerator(),
-                              ),
-                            )
-                          },
-                          child: Text(
-                            'Create QR Code',
-                            style:
-                                TextStyle(fontSize: 18.0, color: Colors.black),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            primary: Color(0xff0cecda),
-                            shape: new RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(30.0),
-                            ),
-                          ),
+                  ),
+                ),
+              ),
+              Container(
+                child: Center(
+                  child: ElevatedButton(
+                    onPressed: () => {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => QRCodeGenerator(),
                         ),
+                      )
+                    },
+                    child: Text(
+                      'Create QR Code',
+                      style: TextStyle(fontSize: 18.0, color: Colors.black),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      primary: Color(0xff0cecda),
+                      shape: new RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(30.0),
                       ),
                     ),
-                  ],
+                  ),
                 ),
               ),
               Padding(
@@ -132,10 +138,12 @@ class _ListStudentPageState extends State<ListStudentPage> {
                             padding: const EdgeInsets.all(20.0),
                             child: Column(
                               children: [
-                                Text("Store Name: " + qrcode,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 20)),
+                                Text(
+                                  "Store Name: " + qrcode,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 20),
+                                ),
                                 SizedBox(height: 20),
                                 Container(
                                   child: Row(
@@ -183,10 +191,9 @@ class _ListStudentPageState extends State<ListStudentPage> {
                                           ),
                                           style: ElevatedButton.styleFrom(
                                             primary: Color(0xff0cecda),
-                                            shape: new RoundedRectangleBorder(
+                                            shape: RoundedRectangleBorder(
                                               borderRadius:
-                                                  new BorderRadius.circular(
-                                                      30.0),
+                                                  BorderRadius.circular(30.0),
                                             ),
                                           ),
                                         ),

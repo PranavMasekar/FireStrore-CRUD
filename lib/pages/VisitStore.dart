@@ -1,3 +1,4 @@
+import 'package:firestore_project/pages/home.dart';
 import 'package:flutter/material.dart';
 
 class VisitStore extends StatelessWidget {
@@ -8,64 +9,75 @@ class VisitStore extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xff1e192e),
-        appBar: AppBar(
-          backgroundColor: Color(0xff372e4a),
-          title: Text("Waiting Room"),
+      backgroundColor: Color(0xff1e192e),
+      appBar: AppBar(
+        backgroundColor: Color(0xff372e4a),
+        title: Text(
+          "Waiting Room",
+          style: TextStyle(fontSize: 20),
         ),
-        body: Column(
-          children: [
-            Text(
-              "Current Store Member Count is $count",
-              style: TextStyle(color: Colors.white),
-            ),
-            
-            Text(
-              "Current Waiting People : $waiting",
-              style: TextStyle(color: Colors.white),
-            ),
-            Text(
-              "Store Name : $store",
-              style: TextStyle(color: Colors.white),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                    onPressed: () => {},
-                    child: Text(
-                      'Stay in Queue',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      primary: Color(0xff0cecda),
-                      shape: new RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(30.0),
-                      ),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            "Current Store Member Count is $count",
+            style: TextStyle(color: Colors.white, fontSize: 18),
+          ),
+          Text(
+            "Current Waiting People : $waiting",
+            style: TextStyle(color: Colors.white, fontSize: 18),
+          ),
+          Text(
+            "Store Name : $store",
+            style: TextStyle(color: Colors.white, fontSize: 18),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                  onPressed: () => {},
+                  child: Text(
+                    'Stay in Queue',
+                    style: TextStyle(fontSize: 18.0, color: Colors.black),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    primary: Color(0xff0cecda),
+                    shape: new RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(30.0),
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                    onPressed: () => {},
-                    child: Text(
-                      'Leave the Queue',
-                      style: TextStyle(fontSize: 18.0, color: Colors.black),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      primary: Color(0xff0cecda),
-                      shape: new RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(30.0),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                  onPressed: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => HomePage(),
                       ),
+                    ),
+                  },
+                  child: Text(
+                    'Leave the Queue',
+                    style: TextStyle(fontSize: 18.0, color: Colors.black),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    primary: Color(0xff0cecda),
+                    shape: new RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(30.0),
                     ),
                   ),
                 ),
-              ],
-            )
-          ],
-        ));
+              ),
+            ],
+          )
+        ],
+      ),
+    );
   }
 }
