@@ -18,7 +18,7 @@ class MyDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Drawer(
-        backgroundColor: Color(0xff372e4a),
+        // backgroundColor: Color(0xff372e4a),
         child: Container(
           padding: EdgeInsets.all(15),
           height: MediaQuery.of(context).size.height,

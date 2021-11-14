@@ -1,11 +1,19 @@
 import 'package:firestore_project/pages/home.dart';
 import 'package:flutter/material.dart';
 
-class VisitStore extends StatelessWidget {
-  final count = 5;
-  final waiting = 7;
+class VisitStore extends StatefulWidget {
   final String store;
   VisitStore({required this.store});
+
+  @override
+  State<VisitStore> createState() => _VisitStoreState();
+}
+
+class _VisitStoreState extends State<VisitStore> {
+  int count = 0;
+
+  int waiting = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +37,7 @@ class VisitStore extends StatelessWidget {
             style: TextStyle(color: Colors.white, fontSize: 18),
           ),
           Text(
-            "Store Name : $store",
+            "Store Name : ${widget.store}",
             style: TextStyle(color: Colors.white, fontSize: 18),
           ),
           Row(
