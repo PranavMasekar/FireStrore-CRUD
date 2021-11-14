@@ -39,21 +39,42 @@ class _StoreState extends State<Store> {
                   )
                 : Column(
                     children: [
-                      Center(
-                          child: Text(
-                        "Store Name : ${store[0]}",
-                        style: TextStyle(color: Colors.white),
-                      )),
-                      Center(
-                          child: Text(
-                        "Person Count : ${store[1]}",
-                        style: TextStyle(color: Colors.white),
-                      )),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.white, width: 0),
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              children: [
+                                Center(
+                                    child: Text(
+                                  "Store Name : ${store[0]}",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 20),
+                                )),
+                                SizedBox(height: 20),
+                                Center(
+                                    child: Text(
+                                  "Person Count : ${store[1]}",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 18),
+                                )),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 30),
                       Center(
                           child: Text(
                         "Your QR Code",
                         style: TextStyle(color: Colors.white),
                       )),
+                      SizedBox(height: 20),
                       BarcodeWidget(
                         barcode: Barcode.qrCode(),
                         color: Colors.white,
@@ -61,14 +82,24 @@ class _StoreState extends State<Store> {
                         width: 200,
                         height: 200,
                       ),
-                      Button(
-                          title: "Remove The Store",
-                          press: () => {
-                                setState(() {
-                                  store[0] = "";
-                                  store[1] = 0;
-                                })
-                              }),
+                      SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Button(
+                              title: "Remove The Store",
+                              press: () => {
+                                    setState(() {
+                                      store[0] = "";
+                                      store[1] = 0;
+                                    })
+                                  }),
+                          Button(
+                            title: "Update Your Data",
+                            push: QRCodeGenerator(),
+                          ),
+                        ],
+                      ),
                     ],
                   )
           ],

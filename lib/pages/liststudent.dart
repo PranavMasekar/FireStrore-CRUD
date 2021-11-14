@@ -95,6 +95,7 @@ class _ListStudentPageState extends State<ListStudentPage> {
               // Text(getCount().toString(),style: TextStyle(color: Colors.white),),
               Column(
                 children: [
+                  Container(child: Image.asset('assets/4.png')),
                   Center(
                     child: Button(
                       title: "Scan QR Code",

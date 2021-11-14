@@ -54,8 +54,13 @@ class MyDrawer extends StatelessWidget {
               SizedBox(
                 height: 15,
               ),
-              Button2(title: "Logout", press: () => signOutMethod(context)),
-              Button2(title: "My Hotel or Store", push : Store())
+              Button2(
+                  title: "Logout",
+                  press: () => {
+                        signOutMethod(context),
+                        store = {0: "", 1: 0}
+                      }),
+              Button2(title: "My Hotel or Store", push: Store())
             ],
           ),
         ),

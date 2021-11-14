@@ -60,28 +60,26 @@ class _LoginPageState extends State<LoginPage> {
     return loading == false
         ? Scaffold(
             backgroundColor: Color(0xff1e192e),
-            body: Stack(
+            body: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                        child: Text("Shotro App",
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 40))),
-                    SizedBox(height: 50),
-                    Center(
-                      child: SignInButton(
-                        Buttons.Google,
-                        shape: new RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(5.0),
-                        ),
-                        onPressed: () {
-                          signInMethod();
-                        },
-                      ),
+                Container(
+                    child: Text("Shotro App",
+                        style: TextStyle(color: Colors.white, fontSize: 40))),
+                SizedBox(height: 50),
+                Container(
+                  child: Image.asset('assets/2.png'),
+                ),
+                Center(
+                  child: SignInButton(
+                    Buttons.Google,
+                    shape: new RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(5.0),
                     ),
-                  ],
+                    onPressed: () {
+                      signInMethod();
+                    },
+                  ),
                 ),
               ],
             ),
