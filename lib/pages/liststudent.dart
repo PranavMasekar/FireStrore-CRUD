@@ -11,6 +11,16 @@ class ListStudentPage extends StatefulWidget {
 }
 
 class _ListStudentPageState extends State<ListStudentPage> {
+  // Future getCount() async => FirebaseFirestore.instance
+  //         .collection('students') //your collectionref
+  //         .where('deleted', isEqualTo: false)
+  //         .get()
+  //         .then((value) {
+  //       var count = 0;
+  //       count = value.docs.length;
+
+  //       return count;
+  //     });
   final Stream<QuerySnapshot> studentStream =
       FirebaseFirestore.instance.collection('students').snapshots();
   CollectionReference students =
@@ -68,6 +78,7 @@ class _ListStudentPageState extends State<ListStudentPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
+              // Text(getCount().toString(),style: TextStyle(color: Colors.white),),
               Column(
                 children: [
                   Center(
@@ -101,25 +112,52 @@ class _ListStudentPageState extends State<ListStudentPage> {
                                 ),
                                 SizedBox(height: 20),
                                 Container(
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
+                                  child: Column(
                                     children: [
-                                      Button(
-                                          title: 'Visit The Store',
-                                          push: VisitStore(store: qrcode)
-                                          ),
-                                         
-                                      SizedBox(
-                                          width: 150,
-                                          child: Button(
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Button(
+                                              title: 'Visit The Store',
+                                              push: VisitStore(store: qrcode)),
+                                          SizedBox(
+                                            width: 150,
+                                            child: Button(
                                               title: 'Cancel',
                                               press: () => {
-                                                    setState(() {
-                                                      qrcode = "";
-                                                      scanned = false;
-                                                    })
-                                                  })),
+                                                setState(() {
+                                                  qrcode = "";
+                                                  scanned = false;
+                                                })
+                                              },
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(height: 20),
+                                      Container(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Button(
+                                                title: 'Visit The Store',
+                                                push:
+                                                    VisitStore(store: qrcode)),
+                                            SizedBox(
+                                                width: 150,
+                                                child: Button(
+                                                    title: 'Cancel',
+                                                    press: () => {
+                                                          setState(() {
+                                                            qrcode = "";
+                                                            scanned = false;
+                                                          })
+                                                        })),
+                                          ],
+                                        ),
+                                      )
                                     ],
                                   ),
                                 )

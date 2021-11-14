@@ -30,8 +30,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
         );
       });
-    }
-    else{
+    } else {
       setState(() {
         loading = false;
       });

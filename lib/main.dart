@@ -1,9 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firestore_project/pages/adduser.dart';
 // import 'package:firestore_project/pages/home.dart';
 // import 'package:firestore_project/pages/QRCodeScanner.dart';
 // import 'package:firestore_project/pages/QRCodeScanner.dart';
 import 'package:flutter/material.dart';
-import 'pages/login.dart';
+// import 'pages/login.dart';
 // import 'pages/QRCodeGenerator.dart';
 
 Future<void> main() async {
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
           ),
           debugShowCheckedModeBanner: false,
-          home: LoginPage(),
+          home: AddUser(),
         );
       },
     );
