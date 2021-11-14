@@ -1,3 +1,4 @@
+import 'package:firestore_project/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:barcode_widget/barcode_widget.dart';
 import '../Components/Button.dart';
@@ -95,6 +96,7 @@ class _QRCodeGeneratorState extends State<QRCodeGenerator> {
                     );
                     store = controller.text.toString();
                   },
+                  replace: HomePage(),
                 )
               ],
             )
