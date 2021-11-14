@@ -26,12 +26,12 @@ class _QRCodeGeneratorState extends State<QRCodeGenerator> {
                     style: TextStyle(color: Colors.white),
                   )
                 : BarcodeWidget(
-                  barcode: Barcode.qrCode(),
-                  color: Colors.white,
-                  data: controller.text,
-                  width: 200,
-                  height: 200,
-                ),
+                    barcode: Barcode.qrCode(),
+                    color: Colors.white,
+                    data: controller.text,
+                    width: 200,
+                    height: 200,
+                  ),
             SizedBox(
               height: 40,
             ),
@@ -74,6 +74,12 @@ class _QRCodeGeneratorState extends State<QRCodeGenerator> {
                         fontSize: 18,
                       ),
                       controller: people,
+                      validator: (value) {
+                        if (value == null || value.isEmpty || int.parse(value) < 0) {
+                          return 'Please Enter Number';
+                        }
+                        return null;
+                      },
                       decoration: InputDecoration(
                         labelText: 'People you can Accomodate',
                         labelStyle:
@@ -94,7 +100,10 @@ class _QRCodeGeneratorState extends State<QRCodeGenerator> {
                     setState(
                       () {},
                     );
-                    store = controller.text.toString();
+                    store = {
+                      0: controller.text.toString(),
+                      1: int.parse(people.text.toString())
+                    };
                   },
                   replace: HomePage(),
                 )

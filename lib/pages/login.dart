@@ -15,6 +15,7 @@ class _LoginPageState extends State<LoginPage> {
   Future<void> checkuserlog() async {
     final FirebaseAuth auth = FirebaseAuth.instance;
     final user = auth.currentUser;
+    print(user == null);
     if (user != null) {
       setState(() {
         name = user.displayName.toString();
@@ -22,14 +23,12 @@ class _LoginPageState extends State<LoginPage> {
         imgurl = user.photoURL.toString();
         loading = true;
       });
-      Future.delayed(Duration.zero, () async {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => HomePage(),
-          ),
-        );
-      });
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomePage(),
+        ),
+      );
     } else {
       setState(() {
         loading = false;
@@ -43,13 +42,15 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   signInMethod() async {
-    await signin();
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => AddUser(),
-      ),
-    );
+    // await signin();
+    if (await signin() != null) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomePage(),
+        ),
+      );
+    }
   }
 
   @override

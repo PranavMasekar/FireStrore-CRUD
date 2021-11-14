@@ -17,9 +17,15 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     final FirebaseAuth auth = FirebaseAuth.instance;
     final user = auth.currentUser;
-    name = user!.displayName.toString();
-    email = user.email.toString();
-    imgurl = user.photoURL.toString();
+    if (user != null) {
+      name = user.displayName.toString();
+      email = user.email.toString();
+      imgurl = user.photoURL.toString();
+    }
+    else{
+      name = "NOT FOUND";
+      email = "NOT FOUND";
+    }
   }
 
   @override

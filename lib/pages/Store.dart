@@ -25,7 +25,7 @@ class _StoreState extends State<Store> {
         ),
         body: ListView(
           children: [
-            store == ""
+            store[0] == ""
                 ? Column(
                     children: [
                       Center(
@@ -41,7 +41,12 @@ class _StoreState extends State<Store> {
                     children: [
                       Center(
                           child: Text(
-                        "Store Name : $store",
+                        "Store Name : ${store[0]}",
+                        style: TextStyle(color: Colors.white),
+                      )),
+                      Center(
+                          child: Text(
+                        "Person Count : ${store[1]}",
                         style: TextStyle(color: Colors.white),
                       )),
                       Center(
@@ -52,7 +57,7 @@ class _StoreState extends State<Store> {
                       BarcodeWidget(
                         barcode: Barcode.qrCode(),
                         color: Colors.white,
-                        data: store,
+                        data: store[0],
                         width: 200,
                         height: 200,
                       ),
@@ -60,7 +65,8 @@ class _StoreState extends State<Store> {
                           title: "Remove The Store",
                           press: () => {
                                 setState(() {
-                                  store = "";
+                                  store[0] = "";
+                                  store[1] = 0;
                                 })
                               }),
                     ],

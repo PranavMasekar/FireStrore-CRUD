@@ -113,9 +113,9 @@ class _AddUserState extends State<AddUser> {
               Container(
                 margin: EdgeInsets.symmetric(vertical: 10.0),
                 child: TextFormField(
+                  keyboardType: TextInputType.number,
                   style: TextStyle(color: Colors.white),
                   autofocus: false,
-                  obscureText: true,
                   decoration: InputDecoration(
                     labelText: 'Number Of Doses',
                     labelStyle: TextStyle(fontSize: 20.0, color: Colors.grey),
@@ -131,6 +131,9 @@ class _AddUserState extends State<AddUser> {
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please Enter doses';
+                    }
+                    if (int.parse(value) > 2 || int.parse(value) < 0 ) {
+                      return 'Please Enter Correct Number of doses';
                     }
                     return null;
                   },
@@ -181,28 +184,28 @@ class _AddUserState extends State<AddUser> {
                   ],
                 ),
               ),
-              // Container(
-              //   child: Column(
-              //     children: [
-              //       Text("Only For Devlopers !!"),
-              //       ElevatedButton(
-              //         onPressed: () => {
-              //           Navigator.pushReplacement(
-              //             context,
-              //             MaterialPageRoute(
-              //               builder: (context) => HomePage(),
-              //             ),
-              //           )
-              //         },
-              //         child: Text(
-              //           'PASS',
-              //           style: TextStyle(fontSize: 18.0),
-              //         ),
-              //         style: ElevatedButton.styleFrom(primary: Colors.red),
-              //       ),
-              //     ],
-              //   ),
-              // )
+              Container(
+                child: Column(
+                  children: [
+                    Text("Only For Devlopers !!"),
+                    ElevatedButton(
+                      onPressed: () => {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => HomePage(),
+                          ),
+                        )
+                      },
+                      child: Text(
+                        'PASS',
+                        style: TextStyle(fontSize: 18.0),
+                      ),
+                      style: ElevatedButton.styleFrom(primary: Colors.red),
+                    ),
+                  ],
+                ),
+              )
             ],
           ),
         ),
