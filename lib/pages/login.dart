@@ -3,6 +3,8 @@ import 'package:firestore_project/Authentication/auth.dart';
 import 'package:firestore_project/pages/adduser.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
+
+import 'home.dart';
 // import 'home.dart';
 
 class LoginPage extends StatefulWidget {
@@ -23,23 +25,12 @@ class _LoginPageState extends State<LoginPage> {
         imgurl = user.photoURL.toString();
         loading = true;
       });
-<<<<<<< HEAD
-      Future.delayed(Duration.zero, () async {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => AddUser(),
-          ),
-        );
-      });
-=======
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => HomePage(),
         ),
       );
->>>>>>> 0cad004499fca8ca65b247ed910a8e4c5b85d9d4
     } else {
       setState(() {
         loading = false;

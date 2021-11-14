@@ -113,8 +113,7 @@ class _HomePageState extends State<HomePage> {
       name = user.displayName.toString();
       email = user.email.toString();
       imgurl = user.photoURL.toString();
-    }
-    else{
+    } else {
       name = "NOT FOUND";
       email = "NOT FOUND";
     }

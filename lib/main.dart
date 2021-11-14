@@ -1,12 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
-<<<<<<< HEAD
-import 'package:firestore_project/pages/home.dart';
-// import 'package:firestore_project/pages/adduser.dart';
-import 'package:firestore_project/pages/login.dart';
-=======
 import 'package:firestore_project/pages/adduser.dart';
 import 'package:firestore_project/pages/home.dart';
->>>>>>> 0cad004499fca8ca65b247ed910a8e4c5b85d9d4
+import 'package:firestore_project/pages/login.dart';
 // import 'package:firestore_project/pages/home.dart';
 // import 'package:firestore_project/pages/QRCodeScanner.dart';
 // import 'package:firestore_project/pages/QRCodeScanner.dart';
@@ -40,12 +35,8 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
           ),
           debugShowCheckedModeBanner: false,
-<<<<<<< HEAD
           routes: {"/home": (context) => HomePage()},
           home: LoginPage(),
-=======
-          home: HomePage(),
->>>>>>> 0cad004499fca8ca65b247ed910a8e4c5b85d9d4
         );
       },
     );

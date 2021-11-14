@@ -2,6 +2,8 @@
 // import 'package:firestore_project/pages/home.dart';
 import 'package:flutter/material.dart';
 
+import 'home.dart';
+
 class AddUser extends StatefulWidget {
   @override
   _AddUserState createState() => _AddUserState();
@@ -132,7 +134,7 @@ class _AddUserState extends State<AddUser> {
                     if (value == null || value.isEmpty) {
                       return 'Please Enter doses';
                     }
-                    if (int.parse(value) > 2 || int.parse(value) < 0 ) {
+                    if (int.parse(value) > 2 || int.parse(value) < 0) {
                       return 'Please Enter Correct Number of doses';
                     }
                     return null;
