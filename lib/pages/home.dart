@@ -18,10 +18,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Future<void> addUser(
-      String myname, String number, String doses, int x) async {
-    CollectionReference data =
-        FirebaseFirestore.instance.collection('Hotel Vista');
+  Future<void> addUser(String myname, String number, String doses, int x,
+      String hotelname) async {
+    CollectionReference data = FirebaseFirestore.instance.collection(hotelname);
     if (x < 5) {
       data
           .add(
@@ -42,11 +41,6 @@ class _HomePageState extends State<HomePage> {
           ),
         );
       });
-      // Navigator.of(context).push(
-      //   MaterialPageRoute(
-      //     builder: (context) => VisitStore(store: qrcode),
-      //   ),
-      // );
     } else {
       WidgetsBinding.instance!.addPostFrameCallback((_) {
         Navigator.of(context).push(
@@ -55,35 +49,14 @@ class _HomePageState extends State<HomePage> {
           ),
         );
       });
-      // Navigator.of(context).push(
-      //   MaterialPageRoute(
-      //     builder: (context) => WaitingPage(),
-      //   ),
-      // );
     }
   }
 
-  // Future<int> getCount() async => FirebaseFirestore.instance
-  //         .collection('Hotel Vista') //your collectionref
-  //         .where('deleted', isEqualTo: false)
-  //         .get()
-  //         .then((value) {
-  //       var count = 0;
-  //       count = value.docs.length;
+  late String qrcode;
 
-  //       return count;
-  //     });
   final Stream<QuerySnapshot> studentStream =
       FirebaseFirestore.instance.collection('Hotel Vista').snapshots();
 
-  // Future<void> deleteUser(id) {
-  //   return students
-  //       .doc(id)
-  //       .delete()
-  //       .catchError((error) => print("Failed to delete user"));
-  // }
-
-  late String qrcode;
   bool scanned = false;
   Future<void> scanQRCode() async {
     try {
@@ -212,7 +185,8 @@ class _HomePageState extends State<HomePage> {
                                                     info['name'].toString(),
                                                     info['number'].toString(),
                                                     info['doses'].toString(),
-                                                    store.length);
+                                                    store.length,
+                                                    qrcode);
                                               },
                                               child: Text(
                                                 "Visit The Store",
