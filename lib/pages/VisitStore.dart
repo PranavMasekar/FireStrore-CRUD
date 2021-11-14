@@ -11,9 +11,8 @@ class VisitStore extends StatefulWidget {
 }
 
 class _VisitStoreState extends State<VisitStore> {
-  int count = 0;
-
-  int waiting = 0;
+  final count = 5;
+  final waiting = 7;
 
   @override
   Widget build(BuildContext context) {

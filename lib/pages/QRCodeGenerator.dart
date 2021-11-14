@@ -1,7 +1,7 @@
-// import 'package:firestore_project/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:barcode_widget/barcode_widget.dart';
-// import 'package:fluttertoast/fluttertoast.dart';
+import '../Components/Button.dart';
+import '../Authentication/auth.dart';
 
 class QRCodeGenerator extends StatefulWidget {
   @override
@@ -10,6 +10,7 @@ class QRCodeGenerator extends StatefulWidget {
 
 class _QRCodeGeneratorState extends State<QRCodeGenerator> {
   TextEditingController controller = TextEditingController();
+  TextEditingController people = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,59 +25,77 @@ class _QRCodeGeneratorState extends State<QRCodeGenerator> {
                     style: TextStyle(color: Colors.white),
                   )
                 : BarcodeWidget(
-                    barcode: Barcode.qrCode(),
-                    color: Colors.white,
-                    data: controller.text,
-                    width: 200,
-                    height: 200,
-                  ),
+                  barcode: Barcode.qrCode(),
+                  color: Colors.white,
+                  data: controller.text,
+                  width: 200,
+                  height: 200,
+                ),
             SizedBox(
               height: 40,
             ),
-            Row(
+            Column(
               children: [
-                Expanded(
-                  child: Theme(
-                    data: ThemeData.dark(),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: TextFormField(
-                        onChanged: (_) => setState(
-                          () {},
-                        ),
-                        autofocus: false,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                        ),
-                        controller: controller,
-                        decoration: InputDecoration(
-                          labelText: 'Enter the name of Hotel',
-                          labelStyle:
-                              TextStyle(fontSize: 20.0, color: Colors.white),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
+                Theme(
+                  data: ThemeData.dark(),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: TextFormField(
+                      autofocus: false,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                      ),
+                      controller: controller,
+                      decoration: InputDecoration(
+                        labelText: 'Enter the name of Hotel',
+                        labelStyle:
+                            TextStyle(fontSize: 14.0, color: Colors.white),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
                         ),
                       ),
                     ),
                   ),
                 ),
                 SizedBox(
-                  width: 12,
+                  height: 12,
                 ),
-                // FloatingActionButton(
-                //   backgroundColor: Colors.blue,
-                //   onPressed: () => {
-                //     Navigator.push(
-                //       context,
-                //       MaterialPageRoute(
-                //         builder: (context) => HomePage(),
-                //       ),
-                //     )
-                //   },
-                //   child: Icon(Icons.check),
-                // ),
+                Theme(
+                  data: ThemeData.dark(),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: TextFormField(
+                      keyboardType: TextInputType.number,
+                      autofocus: false,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                      ),
+                      controller: people,
+                      decoration: InputDecoration(
+                        labelText: 'People you can Accomodate',
+                        labelStyle:
+                            TextStyle(fontSize: 14.0, color: Colors.white),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 12,
+                ),
+                Button2(
+                  title: "Create QR Now",
+                  press: () {
+                    setState(
+                      () {},
+                    );
+                    store = controller.text.toString();
+                  },
+                )
               ],
             )
           ],

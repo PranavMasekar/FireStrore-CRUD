@@ -1,8 +1,8 @@
 import 'package:firestore_project/Authentication/auth.dart';
+import 'package:firestore_project/pages/Store.dart';
 import 'package:flutter/material.dart';
 import 'package:firestore_project/pages/login.dart';
 import '../Components/Button.dart';
-import 'profilePage.dart';
 
 class MyDrawer extends StatelessWidget {
   signOutMethod(context) async {
@@ -19,7 +19,6 @@ class MyDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Drawer(
-        // backgroundColor: Color(0xff372e4a),
         child: Container(
           color: Color(0xff372e4a),
           padding: EdgeInsets.all(15),
@@ -28,19 +27,9 @@ class MyDrawer extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              GestureDetector(
-                onTap: () => {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Profile(),
-                    ),
-                  ),
-                },
-                child: CircleAvatar(
-                  radius: 50,
-                  backgroundImage: NetworkImage(imgurl),
-                ),
+              CircleAvatar(
+                radius: 50,
+                backgroundImage: NetworkImage(imgurl),
               ),
               SizedBox(
                 height: 15,
@@ -65,7 +54,8 @@ class MyDrawer extends StatelessWidget {
               SizedBox(
                 height: 15,
               ),
-              Button2(title: "Logout", press: () => signOutMethod(context))
+              Button2(title: "Logout", press: () => signOutMethod(context)),
+              Button2(title: "My Hotel or Store", push : Store())
             ],
           ),
         ),

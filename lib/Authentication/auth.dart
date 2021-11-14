@@ -8,6 +8,7 @@ final GoogleSignIn googleSignIn = GoogleSignIn();
 String name = "";
 String email = "";
 String imgurl = "";
+String store = "";
 //Sign In function
 Future<User?> signin() async {
   //signin option of different email acc

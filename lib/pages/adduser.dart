@@ -9,7 +9,6 @@ class AddUser extends StatefulWidget {
 
 class _AddUserState extends State<AddUser> {
   final _formKey = GlobalKey<FormState>();
-
   var name = "";
   var number = "";
   var doses = "";
