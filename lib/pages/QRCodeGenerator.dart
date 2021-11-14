@@ -15,23 +15,32 @@ class _QRCodeGeneratorState extends State<QRCodeGenerator> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(0xff372e4a),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text('ADD YOUR STORE'),
+          ],
+        ),
+      ),
       backgroundColor: Color(0xff1e192e),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            controller.text == ""
-                ? Text(
-                    "Add The Name of the Hotel",
-                    style: TextStyle(color: Colors.white),
-                  )
-                : BarcodeWidget(
-                    barcode: Barcode.qrCode(),
-                    color: Colors.white,
-                    data: controller.text,
-                    width: 200,
-                    height: 200,
-                  ),
+            // controller.text == ""
+            //     ? Text(
+            //         "Add The Name of the Hotel",
+            //         style: TextStyle(color: Colors.white),
+            //       )
+            //     : BarcodeWidget(
+            //         barcode: Barcode.qrCode(),
+            //         color: Colors.white,
+            //         data: controller.text,
+            //         width: 200,
+            //         height: 200,
+            //       ),
             SizedBox(
               height: 40,
             ),
@@ -67,6 +76,7 @@ class _QRCodeGeneratorState extends State<QRCodeGenerator> {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: TextFormField(
+                      // widget.stored[1].toString()
                       keyboardType: TextInputType.number,
                       autofocus: false,
                       style: TextStyle(
@@ -75,7 +85,9 @@ class _QRCodeGeneratorState extends State<QRCodeGenerator> {
                       ),
                       controller: people,
                       validator: (value) {
-                        if (value == null || value.isEmpty || int.parse(value) < 0) {
+                        if (value == null ||
+                            value.isEmpty ||
+                            int.parse(value) < 0) {
                           return 'Please Enter Number';
                         }
                         return null;

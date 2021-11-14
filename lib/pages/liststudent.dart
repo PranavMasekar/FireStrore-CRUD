@@ -81,6 +81,7 @@ class _ListStudentPageState extends State<ListStudentPage> {
               // Text(getCount().toString(),style: TextStyle(color: Colors.white),),
               Column(
                 children: [
+                  Container(child: Image.asset('assets/4.png')),
                   Center(
                     child: Button(
                       title: "Scan QR Code",
@@ -136,28 +137,6 @@ class _ListStudentPageState extends State<ListStudentPage> {
                                         ],
                                       ),
                                       SizedBox(height: 20),
-                                      Container(
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            Button(
-                                                title: 'Visit The Store',
-                                                push:
-                                                    VisitStore(store: qrcode)),
-                                            SizedBox(
-                                                width: 150,
-                                                child: Button(
-                                                    title: 'Cancel',
-                                                    press: () => {
-                                                          setState(() {
-                                                            qrcode = "";
-                                                            scanned = false;
-                                                          })
-                                                        })),
-                                          ],
-                                        ),
-                                      )
                                     ],
                                   ),
                                 )
