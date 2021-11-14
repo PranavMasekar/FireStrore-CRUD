@@ -6,7 +6,7 @@ import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'VisitStore.dart';
 // import 'UpdateStudentPage.dart';
 import './QRCodeGenerator.dart';
-import 'adduser.dart';
+// import 'adduser.dart';
 import '../Components/Button.dart';
 
 class ListStudentPage extends StatefulWidget {
@@ -15,6 +15,16 @@ class ListStudentPage extends StatefulWidget {
 }
 
 class _ListStudentPageState extends State<ListStudentPage> {
+  // Future getCount() async => FirebaseFirestore.instance
+  //         .collection('students') //your collectionref
+  //         .where('deleted', isEqualTo: false)
+  //         .get()
+  //         .then((value) {
+  //       var count = 0;
+  //       count = value.docs.length;
+
+  //       return count;
+  //     });
   final Stream<QuerySnapshot> studentStream =
       FirebaseFirestore.instance.collection('students').snapshots();
   CollectionReference students =
@@ -72,6 +82,7 @@ class _ListStudentPageState extends State<ListStudentPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
+              // Text(getCount().toString(),style: TextStyle(color: Colors.white),),
               Column(
                 children: [
                   Center(
@@ -81,54 +92,60 @@ class _ListStudentPageState extends State<ListStudentPage> {
                     ),
                   ),
                   Center(
-                      child: Button(
-                          title: 'Create QR Code', push: QRCodeGenerator())),
+                    child: Button(
+                      title: 'Create QR Code',
+                      push: QRCodeGenerator(),
+                    ),
+                  ),
                 ],
               ),
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey, width: 0.0),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: scanned && qrcode != "-1"
-                        ? Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: Column(
-                              children: [
-                                Text(
-                                  "Store Name: " + qrcode,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 20),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey, width: 0.0),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: scanned && qrcode != "-1"
+                      ? Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Column(
+                            children: [
+                              Text(
+                                "Store Name: " + qrcode,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ),
+                              SizedBox(height: 20),
+                              Container(
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Button(
+                                        title: 'Visit The Store',
+                                        push: VisitStore(store: qrcode)),
+                                    SizedBox(
+                                      width: 150,
+                                      child: Button(
+                                        title: 'Cancel',
+                                        press: () => {
+                                          setState(() {
+                                            qrcode = "";
+                                            scanned = false;
+                                          })
+                                        },
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                SizedBox(height: 20),
-                                Container(
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Button(
-                                          title: 'Visit The Store',
-                                          push: VisitStore(store: qrcode)),
-                                      SizedBox(
-                                          width: 150,
-                                          child: Button(
-                                              title: 'Cancel',
-                                              press: () => {
-                                                    setState(() {
-                                                      qrcode = "";
-                                                      scanned = false;
-                                                    })
-                                                  })),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          )
-                        : SizedBox()),
+                              )
+                            ],
+                          ),
+                        )
+                      : SizedBox(),
+                ),
               ),
             ],
           ),

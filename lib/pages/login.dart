@@ -19,20 +19,19 @@ class _LoginPageState extends State<LoginPage> {
     final user = auth.currentUser;
     if (user != null) {
       setState(() {
-        // name = user.displayName.toString();
-        // email = user.email.toString();
-        // imgurl = user.photoURL.toString();
-        name = "Ajinkya";
-        email = "ac.efg.com";
-        imgurl = "https://picsum.photos/200/300";
+        name = user.displayName.toString();
+        email = user.email.toString();
+        imgurl = user.photoURL.toString();
+        // name = "Ajinkya";
+        // email = "ac.efg.com";
+        // imgurl = "https://picsum.photos/200/300";
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => HomePage(),
+          ),
+        );
       });
-
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => HomePage(),
-        ),
-      );
     }
   }
 

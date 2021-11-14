@@ -11,25 +11,25 @@ class _AddUserState extends State<AddUser> {
   final _formKey = GlobalKey<FormState>();
 
   var name = "";
-  var email = "";
-  var password = "";
+  var number = "";
+  var doses = "";
 
   final namecontrl = TextEditingController();
-  final emailcontrl = TextEditingController();
-  final passcontrl = TextEditingController();
+  final numbercontrl = TextEditingController();
+  final dosecontrl = TextEditingController();
 
   @override
   void dispose() {
     namecontrl.dispose();
-    emailcontrl.dispose();
-    passcontrl.dispose();
+    numbercontrl.dispose();
+    dosecontrl.dispose();
     super.dispose();
   }
 
   clearText() {
     namecontrl.clear();
-    emailcontrl.clear();
-    passcontrl.clear();
+    numbercontrl.clear();
+    dosecontrl.clear();
   }
 
   CollectionReference students =
@@ -38,8 +38,8 @@ class _AddUserState extends State<AddUser> {
     return students.add(
       {
         'name': name,
-        'email': email,
-        'password': password,
+        'number': number,
+        'doses': doses,
       },
     );
   }
@@ -99,7 +99,7 @@ class _AddUserState extends State<AddUser> {
                     errorStyle:
                         TextStyle(color: Colors.redAccent, fontSize: 15),
                   ),
-                  controller: emailcontrl,
+                  controller: numbercontrl,
                   keyboardType: TextInputType.number,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -118,7 +118,7 @@ class _AddUserState extends State<AddUser> {
                   autofocus: false,
                   obscureText: true,
                   decoration: InputDecoration(
-                    labelText: 'Password',
+                    labelText: 'Number Of Doses',
                     labelStyle: TextStyle(fontSize: 20.0, color: Colors.grey),
                     enabledBorder: const OutlineInputBorder(
                       borderSide:
@@ -128,10 +128,10 @@ class _AddUserState extends State<AddUser> {
                     errorStyle:
                         TextStyle(color: Colors.redAccent, fontSize: 15),
                   ),
-                  controller: passcontrl,
+                  controller: dosecontrl,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please Enter Password';
+                      return 'Please Enter doses';
                     }
                     return null;
                   },
@@ -153,8 +153,8 @@ class _AddUserState extends State<AddUser> {
                         if (_formKey.currentState!.validate()) {
                           setState(() {
                             name = namecontrl.text;
-                            email = emailcontrl.text;
-                            password = passcontrl.text;
+                            number = numbercontrl.text;
+                            doses = dosecontrl.text;
                             addUser();
                             clearText();
                           });
@@ -182,25 +182,28 @@ class _AddUserState extends State<AddUser> {
                   ],
                 ),
               ),
-              Container(
-                  child: Column(children: [
-                Text("Only For Devlopers !!"),
-                ElevatedButton(
-                  onPressed: () => {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => HomePage(),
-                      ),
-                    )
-                  },
-                  child: Text(
-                    'PASS',
-                    style: TextStyle(fontSize: 18.0),
-                  ),
-                  style: ElevatedButton.styleFrom(primary: Colors.red),
-                ),
-              ]))
+              // Container(
+              //   child: Column(
+              //     children: [
+              //       Text("Only For Devlopers !!"),
+              //       ElevatedButton(
+              //         onPressed: () => {
+              //           Navigator.pushReplacement(
+              //             context,
+              //             MaterialPageRoute(
+              //               builder: (context) => HomePage(),
+              //             ),
+              //           )
+              //         },
+              //         child: Text(
+              //           'PASS',
+              //           style: TextStyle(fontSize: 18.0),
+              //         ),
+              //         style: ElevatedButton.styleFrom(primary: Colors.red),
+              //       ),
+              //     ],
+              //   ),
+              // )
             ],
           ),
         ),
