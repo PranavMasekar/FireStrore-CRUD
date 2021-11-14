@@ -101,12 +101,9 @@ class _ListStudentPageState extends State<ListStudentPage> {
                       press: () => scanQRCode(),
                     ),
                   ),
-                  Center(
-                    child: Button(
-                      title: 'Create QR Code',
-                      push: QRCodeGenerator(),
-                    ),
-                  ),
+                  // Center(
+                  //     child: Button(
+                  //         title: 'Create QR Code', push: QRCodeGenerator())),
                 ],
               ),
               Padding(

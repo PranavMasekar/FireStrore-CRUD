@@ -1,8 +1,15 @@
 import 'package:firestore_project/Authentication/auth.dart';
+import 'package:firestore_project/pages/QRCodeGenerator.dart';
 import 'package:flutter/material.dart';
 import 'package:barcode_widget/barcode_widget.dart';
+import '../Components/Button.dart';
 
-class Store extends StatelessWidget {
+class Store extends StatefulWidget {
+  @override
+  State<Store> createState() => _StoreState();
+}
+
+class _StoreState extends State<Store> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,17 +25,28 @@ class Store extends StatelessWidget {
         ),
         body: ListView(
           children: [
-            store == ""
-                ? Center(
-                    child: Text(
-                    "No Store Found!!",
-                    style: TextStyle(color: Colors.white),
-                  ))
+            store[0] == ""
+                ? Column(
+                    children: [
+                      Center(
+                          child: Text(
+                        "No Store Found!!",
+                        style: TextStyle(color: Colors.white),
+                      )),
+                      Button(
+                          title: "Create Your Store", push: QRCodeGenerator())
+                    ],
+                  )
                 : Column(
                     children: [
                       Center(
                           child: Text(
-                        "Store Name : $store",
+                        "Store Name : ${store[0]}",
+                        style: TextStyle(color: Colors.white),
+                      )),
+                      Center(
+                          child: Text(
+                        "Person Count : ${store[1]}",
                         style: TextStyle(color: Colors.white),
                       )),
                       Center(
@@ -39,10 +57,18 @@ class Store extends StatelessWidget {
                       BarcodeWidget(
                         barcode: Barcode.qrCode(),
                         color: Colors.white,
-                        data: store,
+                        data: store[0],
                         width: 200,
                         height: 200,
                       ),
+                      Button(
+                          title: "Remove The Store",
+                          press: () => {
+                                setState(() {
+                                  store[0] = "";
+                                  store[1] = 0;
+                                })
+                              }),
                     ],
                   )
           ],
