@@ -6,11 +6,26 @@ import './QRCodeGenerator.dart';
 import '../Components/Button.dart';
 
 class ListStudentPage extends StatefulWidget {
+  final Map info;
+
+  const ListStudentPage({Key? key, required this.info}) : super(key: key);
   @override
   _ListStudentPageState createState() => _ListStudentPageState();
 }
 
 class _ListStudentPageState extends State<ListStudentPage> {
+  CollectionReference students =
+      FirebaseFirestore.instance.collection('students');
+  Future<void> addUser() {
+    return students.add(
+      {
+        // 'name': info[],
+        // 'number': number,
+        // 'doses': doses,
+      },
+    );
+  }
+
   // Future getCount() async => FirebaseFirestore.instance
   //         .collection('students') //your collectionref
   //         .where('deleted', isEqualTo: false)
@@ -23,14 +38,13 @@ class _ListStudentPageState extends State<ListStudentPage> {
   //     });
   final Stream<QuerySnapshot> studentStream =
       FirebaseFirestore.instance.collection('students').snapshots();
-  CollectionReference students =
-      FirebaseFirestore.instance.collection('students');
-  Future<void> deleteUser(id) {
-    return students
-        .doc(id)
-        .delete()
-        .catchError((error) => print("Failed to delete user"));
-  }
+
+  // Future<void> deleteUser(id) {
+  //   return students
+  //       .doc(id)
+  //       .delete()
+  //       .catchError((error) => print("Failed to delete user"));
+  // }
 
   late String qrcode;
   bool scanned = false;
@@ -98,26 +112,51 @@ class _ListStudentPageState extends State<ListStudentPage> {
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey, width: 0.0),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: scanned && qrcode != "-1"
-                        ? Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: Column(
-                              children: [
-                                Text(
-                                  "Store Name: " + qrcode,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 20),
-                                ),
-                                SizedBox(height: 20),
-                                Container(
-                                  child: Column(
-                                    children: [
-                                      Row(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey, width: 0.0),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: scanned && qrcode != "-1"
+                      ? Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Column(
+                            children: [
+                              Text(
+                                "Store Name: " + qrcode,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ),
+                              SizedBox(height: 20),
+                              Container(
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Button(
+                                            title: 'Visit The Store',
+                                            push: VisitStore(store: qrcode)),
+                                        SizedBox(
+                                          width: 150,
+                                          child: Button(
+                                            title: 'Cancel',
+                                            press: () => {
+                                              setState(
+                                                () {
+                                                  qrcode = "";
+                                                  scanned = false;
+                                                },
+                                              )
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 20),
+                                    Container(
+                                      child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceEvenly,
                                         children: [
@@ -129,45 +168,26 @@ class _ListStudentPageState extends State<ListStudentPage> {
                                             child: Button(
                                               title: 'Cancel',
                                               press: () => {
-                                                setState(() {
-                                                  qrcode = "";
-                                                  scanned = false;
-                                                })
+                                                setState(
+                                                  () {
+                                                    qrcode = "";
+                                                    scanned = false;
+                                                  },
+                                                ),
                                               },
                                             ),
                                           ),
                                         ],
                                       ),
-                                      SizedBox(height: 20),
-                                      Container(
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            Button(
-                                                title: 'Visit The Store',
-                                                push:
-                                                    VisitStore(store: qrcode)),
-                                            SizedBox(
-                                                width: 150,
-                                                child: Button(
-                                                    title: 'Cancel',
-                                                    press: () => {
-                                                          setState(() {
-                                                            qrcode = "";
-                                                            scanned = false;
-                                                          })
-                                                        })),
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          )
-                        : SizedBox()),
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        )
+                      : SizedBox(),
+                ),
               ),
             ],
           ),

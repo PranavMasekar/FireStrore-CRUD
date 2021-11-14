@@ -14,8 +14,7 @@ class Button extends StatelessWidget {
       onPressed: () => {
         if (push != "")
           {
-            Navigator.push(
-              context,
+            Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) => push,
               ),
@@ -23,8 +22,7 @@ class Button extends StatelessWidget {
           },
         if (replace != "")
           {
-            Navigator.pushReplacement(
-              context,
+            Navigator.of(context).pushReplacement(
               MaterialPageRoute(
                 builder: (context) => replace,
               ),
@@ -59,8 +57,7 @@ class Button2 extends StatelessWidget {
       onPressed: () => {
         if (push != "")
           {
-            Navigator.push(
-              context,
+            Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) => push,
               ),
@@ -68,8 +65,7 @@ class Button2 extends StatelessWidget {
           },
         if (replace != "")
           {
-            Navigator.pushReplacement(
-              context,
+            Navigator.of(context).pushReplacement(
               MaterialPageRoute(
                 builder: (context) => replace,
               ),

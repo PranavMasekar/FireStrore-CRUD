@@ -1,5 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firestore_project/pages/home.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:firestore_project/pages/home.dart';
 import 'package:flutter/material.dart';
 
 class AddUser extends StatefulWidget {
@@ -31,17 +31,17 @@ class _AddUserState extends State<AddUser> {
     dosecontrl.clear();
   }
 
-  CollectionReference students =
-      FirebaseFirestore.instance.collection('students');
-  Future<void> addUser() {
-    return students.add(
-      {
-        'name': name,
-        'number': number,
-        'doses': doses,
-      },
-    );
-  }
+  // CollectionReference students =
+  //     FirebaseFirestore.instance.collection('students');
+  // Future<void> addUser() {
+  //   return students.add(
+  //     {
+  //       'name': name,
+  //       'number': number,
+  //       'doses': doses,
+  //     },
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -154,15 +154,14 @@ class _AddUserState extends State<AddUser> {
                             name = namecontrl.text;
                             number = numbercontrl.text;
                             doses = dosecontrl.text;
-                            addUser();
                             clearText();
                           });
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => HomePage(),
-                            ),
-                          );
+                          Navigator.pushReplacementNamed(context, "/home",
+                              arguments: {
+                                "name": name,
+                                "doses": doses,
+                                "number": number,
+                              });
                         }
                       },
                       child: Text(
