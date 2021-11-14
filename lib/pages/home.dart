@@ -1,10 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firestore_project/Authentication/auth.dart';
 import 'package:flutter/material.dart';
-// import 'addstudent.dart';
 import 'liststudent.dart';
 import 'drawer.dart';
-import 'profilePage.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -15,14 +13,11 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    // final FirebaseAuth auth = FirebaseAuth.instance;
-    // final user = auth.currentUser;
-    // name = user!.displayName.toString();
-    // email = user.email.toString();
-    // imgurl = user.photoURL.toString();
-    name = "Ajinkya";
-    email = "ac.efg.com";
-    imgurl = "https://picsum.photos/200/300";
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final user = auth.currentUser;
+    name = user!.displayName.toString();
+    email = user.email.toString();
+    imgurl = user.photoURL.toString();
   }
 
   @override

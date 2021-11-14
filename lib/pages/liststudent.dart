@@ -1,12 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:firestore_project/pages/profilePage.dart';
 import 'package:flutter/material.dart';
-// import 'package:firestore_project/pages/QRCodeScanner.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'VisitStore.dart';
-// import 'UpdateStudentPage.dart';
 import './QRCodeGenerator.dart';
-import 'adduser.dart';
 import '../Components/Button.dart';
 
 class ListStudentPage extends StatefulWidget {
@@ -111,7 +107,9 @@ class _ListStudentPageState extends State<ListStudentPage> {
                                     children: [
                                       Button(
                                           title: 'Visit The Store',
-                                          push: VisitStore(store: qrcode)),
+                                          push: VisitStore(store: qrcode)
+                                          ),
+                                         
                                       SizedBox(
                                           width: 150,
                                           child: Button(
