@@ -36,11 +36,12 @@ class _HomePageState extends State<HomePage> {
             (error, stackTrace) => print("Error"),
           );
       WidgetsBinding.instance!.addPostFrameCallback((_) {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => VisitStore(store: qrcode),
-          ),
-        );
+        Navigator.of(context).pushNamed("/store", arguments: {
+          "qrcode": hotelname,
+          'name': myname,
+          'number': number,
+          'doses': doses,
+        });
       });
     } else {
       WidgetsBinding.instance!.addPostFrameCallback((_) {
@@ -96,7 +97,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final info =
-        (ModalRoute.of(context)!.settings.arguments as Map<String, String>);
+        (ModalRoute.of(context)!.settings.arguments as Map<String, String?>);
     print(info["name"]);
     return Scaffold(
       appBar: AppBar(

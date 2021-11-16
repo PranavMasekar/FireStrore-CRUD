@@ -161,12 +161,14 @@ class _AddUserState extends State<AddUser> {
                             doses = dosecontrl.text;
                             clearText();
                           });
-                          Navigator.pushReplacementNamed(context, "/home",
-                              arguments: {
-                                "name": name,
-                                "doses": doses,
-                                "number": number,
-                              });
+                          WidgetsBinding.instance!.addPostFrameCallback((_) {
+                            Navigator.pushReplacementNamed(context, "/home",
+                                arguments: {
+                                  "name": name,
+                                  "doses": doses,
+                                  "number": number,
+                                });
+                          });
                         }
                       },
                       child: Text(

@@ -16,6 +16,9 @@ class _VisitStoreState extends State<VisitStore> {
 
   @override
   Widget build(BuildContext context) {
+    final info =
+        (ModalRoute.of(context)!.settings.arguments as Map<String, String>);
+    print(info);
     return Scaffold(
       backgroundColor: Color(0xff1e192e),
       appBar: AppBar(
@@ -45,6 +48,45 @@ class _VisitStoreState extends State<VisitStore> {
           Button(
             title: "DONE",
             replace: HomePage(),
+          ),
+          Text(
+            "Store Name : $info['hotelname']",
+            style: TextStyle(color: Colors.white, fontSize: 18),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Button(title: "Stay in Queue"),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      primary: Color(0xff0cecda),
+                      shape: new RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(30.0),
+                      )),
+                  onPressed: () {
+                    // Validate returns true if the form is valid, otherwise false.
+
+                    WidgetsBinding.instance!.addPostFrameCallback((_) {
+                      Navigator.pushReplacementNamed(context, "/home",
+                          arguments: {
+                            "name": info['name'],
+                            "doses": info['doses'],
+                            "number": info['number'],
+                          });
+                    });
+                  },
+                  child: Text(
+                    'Leave the queue',
+                    style: TextStyle(fontSize: 18.0),
+                  ),
+                ),
+              ),
+            ],
           )
         ],
       ),
