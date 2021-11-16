@@ -17,7 +17,7 @@ class _LoginPageState extends State<LoginPage> {
   Future<void> checkuserlog() async {
     final FirebaseAuth auth = FirebaseAuth.instance;
     final user = auth.currentUser;
-    print(user == null);
+    print(user);
     if (user != null) {
       setState(() {
         name = user.displayName.toString();
@@ -28,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => HomePage(),
+          builder: (context) => AddUser(),
         ),
       );
     } else {
@@ -49,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => HomePage(),
+          builder: (context) => AddUser(),
         ),
       );
     }

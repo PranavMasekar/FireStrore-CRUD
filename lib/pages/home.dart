@@ -21,6 +21,7 @@ class _HomePageState extends State<HomePage> {
   Future<void> addUser(String myname, String number, String doses, int x,
       String hotelname) async {
     CollectionReference data = FirebaseFirestore.instance.collection(hotelname);
+    x = 3;
     if (x < 5) {
       data
           .add(
@@ -30,7 +31,7 @@ class _HomePageState extends State<HomePage> {
               'doses': doses,
             },
           )
-          .then((value) => print('User Added'))
+          .then((value) => print('User Added\nx = $x'))
           .onError(
             (error, stackTrace) => print("Error"),
           );
@@ -45,7 +46,7 @@ class _HomePageState extends State<HomePage> {
       WidgetsBinding.instance!.addPostFrameCallback((_) {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => WaitingPage(),
+            builder: (context) => WaitingPage(store: qrcode),
           ),
         );
       });
@@ -55,7 +56,7 @@ class _HomePageState extends State<HomePage> {
   late String qrcode;
 
   final Stream<QuerySnapshot> studentStream =
-      FirebaseFirestore.instance.collection('Hotel Vista').snapshots();
+      FirebaseFirestore.instance.collection('').snapshots();
 
   bool scanned = false;
   Future<void> scanQRCode() async {

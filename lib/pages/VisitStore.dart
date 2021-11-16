@@ -21,36 +21,30 @@ class _VisitStoreState extends State<VisitStore> {
       appBar: AppBar(
         backgroundColor: Color(0xff372e4a),
         title: Text(
-          "Waiting Room",
+          "Welcome",
           style: TextStyle(fontSize: 20),
         ),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        // mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            "Current Store Member Count is $count",
-            style: TextStyle(color: Colors.white, fontSize: 18),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              widget.store,
+              style: TextStyle(color: Colors.white, fontSize: 30),
+            ),
+          ),
+          Container(
+            child: Image.asset('assets/3.png'),
           ),
           Text(
-            "Current Waiting People : $waiting",
-            style: TextStyle(color: Colors.white, fontSize: 18),
+            "After Completing your Work Press the Button Below",
+            style: TextStyle(color: Colors.white, fontSize: 15),
           ),
-          Text(
-            "Store Name : ${widget.store}",
-            style: TextStyle(color: Colors.white, fontSize: 18),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Button(title: "Stay in Queue"),
-              ),
-              Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Button(title: "Leave the Queue", push: HomePage())),
-            ],
+          Button(
+            title: "DONE",
+            replace: HomePage(),
           )
         ],
       ),
