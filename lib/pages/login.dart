@@ -25,12 +25,14 @@ class _LoginPageState extends State<LoginPage> {
         imgurl = user.photoURL.toString();
         loading = true;
       });
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => HomePage(),
-        ),
-      );
+      WidgetsBinding.instance!.addPostFrameCallback((_) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => AddUser(),
+          ),
+        );
+      });
     } else {
       setState(() {
         loading = false;
@@ -46,12 +48,14 @@ class _LoginPageState extends State<LoginPage> {
   signInMethod() async {
     // await signin();
     if (await signin() != null) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => HomePage(),
-        ),
-      );
+      WidgetsBinding.instance!.addPostFrameCallback((_) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => AddUser(),
+          ),
+        );
+      });
     }
   }
 

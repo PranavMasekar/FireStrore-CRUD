@@ -133,9 +133,24 @@ class _ListStudentPageState extends State<ListStudentPage> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
                                       children: [
-                                        Button(
-                                            title: 'Visit The Store',
-                                            push: VisitStore(store: qrcode)),
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            WidgetsBinding.instance!
+                                                .addPostFrameCallback((_) {
+                                              Navigator.pushReplacementNamed(
+                                                  context, "/home",
+                                                  arguments: {
+                                                    // "name": inf,
+                                                    // "doses": doses,
+                                                    // "number": number,
+                                                  });
+                                            });
+                                          },
+                                          child: Text(
+                                            'Submit',
+                                            style: TextStyle(fontSize: 18.0),
+                                          ),
+                                        ),
                                         SizedBox(
                                           width: 150,
                                           child: Button(
@@ -160,7 +175,7 @@ class _ListStudentPageState extends State<ListStudentPage> {
                                         children: [
                                           Button(
                                               title: 'Visit The Store',
-                                              push: VisitStore(store: qrcode)),
+                                              push: VisitStore()),
                                           SizedBox(
                                             width: 150,
                                             child: Button(

@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firestore_project/pages/adduser.dart';
+import 'package:firestore_project/pages/VisitStore.dart';
+// import 'package:firestore_project/pages/adduser.dart';
 import 'package:firestore_project/pages/home.dart';
 import 'package:firestore_project/pages/login.dart';
 // import 'package:firestore_project/pages/home.dart';
@@ -35,7 +36,10 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
           ),
           debugShowCheckedModeBanner: false,
-          routes: {"/home": (context) => HomePage()},
+          routes: {
+            "/home": (context) => HomePage(),
+            "/store": (context) => VisitStore(),
+          },
           home: LoginPage(),
         );
       },
