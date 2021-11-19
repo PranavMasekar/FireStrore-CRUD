@@ -1,5 +1,3 @@
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firestore_project/Authentication/auth.dart';
@@ -7,9 +5,8 @@ import 'package:firestore_project/Components/Button.dart';
 import 'package:firestore_project/pages/waiting.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import '../database.dart';
 import 'QRCodeGenerator.dart';
-import 'VisitStore.dart';
-// import 'liststudent.dart';
 import 'drawer.dart';
 
 class HomePage extends StatefulWidget {
@@ -23,24 +20,19 @@ class _HomePageState extends State<HomePage> {
     CollectionReference data = FirebaseFirestore.instance.collection(hotelname);
     if (x < 5) {
       data
-          .add(
-            {
-              'name': myname,
-              'number': number,
-              'doses': doses,
-            },
-          )
+          .add({
+            'name': myname,
+            'number': number,
+            'doses': doses,
+          })
           .then((value) => print('User Added'))
           .onError(
             (error, stackTrace) => print("Error"),
           );
       WidgetsBinding.instance!.addPostFrameCallback((_) {
-        Navigator.of(context).pushNamed("/store", arguments: {
-          "qrcode": hotelname,
-          'name': myname,
-          'number': number,
-          'doses': doses,
-        });
+        Navigator.of(context).pushNamed(
+          "/store",
+        );
       });
     } else {
       WidgetsBinding.instance!.addPostFrameCallback((_) {
@@ -56,7 +48,7 @@ class _HomePageState extends State<HomePage> {
   late String qrcode;
 
   final Stream<QuerySnapshot> studentStream =
-      FirebaseFirestore.instance.collection('Hotel Vista').snapshots();
+      FirebaseFirestore.instance.collection(Data.hotelname).snapshots();
 
   bool scanned = false;
   Future<void> scanQRCode() async {
@@ -69,7 +61,7 @@ class _HomePageState extends State<HomePage> {
       );
       if (mounted) {
         setState(() {
-          qrcode = qrCode;
+          Data.hotelname = qrCode;
           scanned = true;
         });
       }
@@ -79,25 +71,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    final FirebaseAuth auth = FirebaseAuth.instance;
-    final user = auth.currentUser;
-    if (user != null) {
-      name = user.displayName.toString();
-      email = user.email.toString();
-      imgurl = user.photoURL.toString();
-    } else {
-      name = "NOT FOUND";
-      email = "NOT FOUND";
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final info =
-        (ModalRoute.of(context)!.settings.arguments as Map<String, String?>);
-    print(info["name"]);
+    print(Data.name);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xff372e4a),
@@ -115,13 +90,6 @@ class _HomePageState extends State<HomePage> {
               child: CircularProgressIndicator(),
             );
           }
-          final List store = [];
-          snapshot.data!.docs.map((DocumentSnapshot document) {
-            Map a = document.data() as Map<String, dynamic>;
-            store.add(a);
-            a['id'] = document.id;
-          }).toList();
-
           return Container(
             color: Color(0xff1e192e),
             child: Column(
@@ -157,7 +125,7 @@ class _HomePageState extends State<HomePage> {
                             child: Column(
                               children: [
                                 Text(
-                                  "Store Name: " + qrcode,
+                                  "Store Name: " + Data.hotelname,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       color: Colors.white, fontSize: 20),
@@ -183,11 +151,11 @@ class _HomePageState extends State<HomePage> {
                                               ),
                                               onPressed: () {
                                                 addUser(
-                                                    info['name'].toString(),
-                                                    info['number'].toString(),
-                                                    info['doses'].toString(),
+                                                    Data.name,
+                                                    Data.number,
+                                                    Data.doses,
                                                     store.length,
-                                                    qrcode);
+                                                    Data.hotelname);
                                               },
                                               child: Text(
                                                 "Visit The Store",

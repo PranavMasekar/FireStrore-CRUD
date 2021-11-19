@@ -1,14 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firestore_project/pages/VisitStore.dart';
-// import 'package:firestore_project/pages/adduser.dart';
 import 'package:firestore_project/pages/home.dart';
 import 'package:firestore_project/pages/login.dart';
-// import 'package:firestore_project/pages/home.dart';
-// import 'package:firestore_project/pages/QRCodeScanner.dart';
-// import 'package:firestore_project/pages/QRCodeScanner.dart';
 import 'package:flutter/material.dart';
-// import 'pages/login.dart';
-// import 'pages/QRCodeGenerator.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

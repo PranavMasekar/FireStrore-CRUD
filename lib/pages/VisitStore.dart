@@ -1,11 +1,8 @@
-import 'package:firestore_project/pages/home.dart';
 import 'package:flutter/material.dart';
 import '../Components/Button.dart';
+import '../database.dart';
 
 class VisitStore extends StatefulWidget {
-  // final String store;
-  // VisitStore({required this.store});
-
   @override
   State<VisitStore> createState() => _VisitStoreState();
 }
@@ -16,9 +13,6 @@ class _VisitStoreState extends State<VisitStore> {
 
   @override
   Widget build(BuildContext context) {
-    final info =
-        (ModalRoute.of(context)!.settings.arguments as Map<String, String>);
-    print(info);
     return Scaffold(
       backgroundColor: Color(0xff1e192e),
       appBar: AppBar(
@@ -40,7 +34,7 @@ class _VisitStoreState extends State<VisitStore> {
             style: TextStyle(color: Colors.white, fontSize: 18),
           ),
           Text(
-            "Store Name : $info['hotelname']",
+            "Store Name : ${Data.hotelname}",
             style: TextStyle(color: Colors.white, fontSize: 18),
           ),
           Row(
@@ -62,12 +56,10 @@ class _VisitStoreState extends State<VisitStore> {
                     // Validate returns true if the form is valid, otherwise false.
 
                     WidgetsBinding.instance!.addPostFrameCallback((_) {
-                      Navigator.pushReplacementNamed(context, "/home",
-                          arguments: {
-                            "name": info['name'],
-                            "doses": info['doses'],
-                            "number": info['number'],
-                          });
+                      Navigator.pushReplacementNamed(
+                        context,
+                        "/home",
+                      );
                     });
                   },
                   child: Text(

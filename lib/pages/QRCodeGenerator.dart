@@ -1,6 +1,5 @@
 import 'package:firestore_project/pages/home.dart';
 import 'package:flutter/material.dart';
-import 'package:barcode_widget/barcode_widget.dart';
 import '../Components/Button.dart';
 import '../Authentication/auth.dart';
 

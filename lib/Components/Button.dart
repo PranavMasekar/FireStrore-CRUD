@@ -14,19 +14,23 @@ class Button extends StatelessWidget {
       onPressed: () => {
         if (push != "")
           {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => push,
-              ),
-            ),
+            WidgetsBinding.instance!.addPostFrameCallback((_) {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => push,
+                ),
+              );
+            })
           },
         if (replace != "")
           {
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (context) => replace,
-              ),
-            ),
+            WidgetsBinding.instance!.addPostFrameCallback((_) {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => replace,
+                ),
+              );
+            })
           },
         if (press != "") press(),
       },
@@ -57,19 +61,23 @@ class Button2 extends StatelessWidget {
       onPressed: () => {
         if (push != "")
           {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => push,
-              ),
-            ),
+            WidgetsBinding.instance!.addPostFrameCallback((_) {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => push,
+                ),
+              );
+            })
           },
         if (replace != "")
           {
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (context) => replace,
-              ),
-            ),
+            WidgetsBinding.instance!.addPostFrameCallback((_) {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => replace,
+                ),
+              );
+            })
           },
         if (press != "") press(),
       },

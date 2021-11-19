@@ -4,6 +4,7 @@ import 'package:firestore_project/pages/adduser.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 
+import '../database.dart';
 import 'home.dart';
 // import 'home.dart';
 
@@ -20,9 +21,9 @@ class _LoginPageState extends State<LoginPage> {
     print(user == null);
     if (user != null) {
       setState(() {
-        name = user.displayName.toString();
-        email = user.email.toString();
-        imgurl = user.photoURL.toString();
+        Data.username = user.displayName.toString();
+        Data.useremail = user.email.toString();
+        Data.userimgurl = user.photoURL.toString();
         loading = true;
       });
       WidgetsBinding.instance!.addPostFrameCallback((_) {

@@ -2,6 +2,7 @@
 // import 'package:firestore_project/pages/home.dart';
 import 'package:flutter/material.dart';
 
+import '../database.dart';
 import 'home.dart';
 
 class AddUser extends StatefulWidget {
@@ -32,18 +33,6 @@ class _AddUserState extends State<AddUser> {
     numbercontrl.clear();
     dosecontrl.clear();
   }
-
-  // CollectionReference students =
-  //     FirebaseFirestore.instance.collection('students');
-  // Future<void> addUser() {
-  //   return students.add(
-  //     {
-  //       'name': name,
-  //       'number': number,
-  //       'doses': doses,
-  //     },
-  //   );
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -156,18 +145,16 @@ class _AddUserState extends State<AddUser> {
                         // Validate returns true if the form is valid, otherwise false.
                         if (_formKey.currentState!.validate()) {
                           setState(() {
-                            name = namecontrl.text;
-                            number = numbercontrl.text;
-                            doses = dosecontrl.text;
+                            Data.name = namecontrl.text;
+                            Data.number = numbercontrl.text;
+                            Data.doses = dosecontrl.text;
                             clearText();
                           });
                           WidgetsBinding.instance!.addPostFrameCallback((_) {
-                            Navigator.pushReplacementNamed(context, "/home",
-                                arguments: {
-                                  "name": name,
-                                  "doses": doses,
-                                  "number": number,
-                                });
+                            Navigator.pushReplacementNamed(
+                              context,
+                              "/home",
+                            );
                           });
                         }
                       },
@@ -177,7 +164,9 @@ class _AddUserState extends State<AddUser> {
                       ),
                     ),
                     ElevatedButton(
-                      onPressed: () => {clearText()},
+                      onPressed: () => {
+                        clearText(),
+                      },
                       child: Text(
                         'Reset',
                         style: TextStyle(fontSize: 18.0),
