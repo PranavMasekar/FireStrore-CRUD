@@ -18,6 +18,7 @@ class _HomePageState extends State<HomePage> {
   Future<void> addUser(String myname, String number, String doses, int x,
       String hotelname) async {
     CollectionReference data = FirebaseFirestore.instance.collection(hotelname);
+    x = 3;
     if (x < 5) {
       data
           .add({
@@ -38,7 +39,7 @@ class _HomePageState extends State<HomePage> {
       WidgetsBinding.instance!.addPostFrameCallback((_) {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => WaitingPage(),
+            builder: (context) => WaitingPage(store: qrcode),
           ),
         );
       });
