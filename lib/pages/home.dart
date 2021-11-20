@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firestore_project/Components/Button.dart';
+import 'package:firestore_project/pages/VisitStore.dart';
 // import 'package:firestore_project/pages/waiting.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import '../database.dart';
-import 'QRCodeGenerator.dart';
 import 'drawer.dart';
 
 class HomePage extends StatefulWidget {
@@ -22,25 +22,30 @@ class _HomePageState extends State<HomePage> {
 
     print(mydoc.data()?["Customers"].length);
 
-    FirebaseFirestore.instance.collection('Hotels').doc(Data.hotelname).set(
+    await FirebaseFirestore.instance
+        .collection('Hotels')
+        .doc(Data.hotelname)
+        .set(
       {
         "Customers": FieldValue.arrayUnion(
           [
-            {
-              "name": Data.name,
-              "number": Data.number,
-              "doses": Data.doses,
-            },
+            {"email": Data.useremail},
           ],
         ),
       },
       SetOptions(merge: true),
     ).then((value) => print("added"));
-    // WidgetsBinding.instance!.addPostFrameCallback((_) {
-    //   Navigator.of(context).pushNamed(
-    //     "/store",
-    //   );
-    // });
+
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(Data.useremail)
+        .set(
+      {
+        "mail": Data.useremail,
+        "hotel": Data.hotelname,
+      },
+      SetOptions(merge: true),
+    ).then((value) => print("added"));
   }
 
   String qrcode = "";
@@ -66,6 +71,32 @@ class _HomePageState extends State<HomePage> {
     } on Error {
       qrcode = 'Failed To Scan';
     }
+  }
+
+  Future<void> getHotel() async {
+    FirebaseFirestore.instance
+        .collection("users")
+        .where('mail', isEqualTo: Data.useremail)
+        .get()
+        .then((querySnapshot) {
+      querySnapshot.docs.forEach((result) {
+        setState(() {
+          Data.hotelname = result.data()['hotel'];
+        });
+        print(Data.hotelname);
+        if (Data.hotelname != "")
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => VisitStore(),
+            ),
+          );
+      });
+    });
+  }
+
+  void initState() {
+    super.initState();
+    getHotel();
   }
 
   @override
@@ -96,18 +127,21 @@ class _HomePageState extends State<HomePage> {
                 // Text(getCount().toString(),style: TextStyle(color: Colors.white),),
                 Column(
                   children: [
+                    Container(
+                      child: Image.asset('assets/4.png'),
+                    ),
                     Center(
                       child: Button(
                         title: "Scan QR Code",
                         press: () => scanQRCode(),
                       ),
                     ),
-                    Center(
-                      child: Button(
-                        title: 'Create QR Code',
-                        push: QRCodeGenerator(),
-                      ),
-                    ),
+                    // Center(
+                    //   child: Button(
+                    //     title: 'Create QR Code',
+                    //     push: QRCodeGenerator(),
+                    //   ),
+                    // ),
                   ],
                 ),
                 Padding(
@@ -117,7 +151,7 @@ class _HomePageState extends State<HomePage> {
                       border: Border.all(color: Colors.grey, width: 0.0),
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: scanned && qrcode != "-1"
+                    child: (scanned && qrcode != "-1")
                         ? Padding(
                             padding: const EdgeInsets.all(20.0),
                             child: Column(
@@ -149,6 +183,12 @@ class _HomePageState extends State<HomePage> {
                                               ),
                                               onPressed: () {
                                                 addUser(5);
+                                                Navigator.of(context)
+                                                    .pushReplacement(
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          VisitStore()),
+                                                );
                                               },
                                               child: Text(
                                                 "Visit The Store",

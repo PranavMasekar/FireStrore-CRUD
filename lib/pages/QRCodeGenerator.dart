@@ -2,6 +2,8 @@ import 'package:firestore_project/pages/home.dart';
 import 'package:flutter/material.dart';
 import '../Components/Button.dart';
 import '../Authentication/auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import '../database.dart';
 
 class QRCodeGenerator extends StatefulWidget {
   @override
@@ -9,6 +11,17 @@ class QRCodeGenerator extends StatefulWidget {
 }
 
 class _QRCodeGeneratorState extends State<QRCodeGenerator> {
+  Future<void> addUserData() async {
+    FirebaseFirestore.instance.collection('users').doc(Data.useremail).set(
+      {
+        "mail": Data.useremail,
+        "accum": Data.maxpeople,
+        "myhotel": Data.myhotel,
+      },
+      SetOptions(merge: true),
+    ).then((value) => print("added"));
+  }
+
   TextEditingController controller = TextEditingController();
   TextEditingController people = TextEditingController();
   @override
@@ -106,15 +119,14 @@ class _QRCodeGeneratorState extends State<QRCodeGenerator> {
                   height: 12,
                 ),
                 Button2(
-                  title: "Create QR Now",
+                  title: "Create Store",
                   press: () {
                     setState(
                       () {},
                     );
-                    store = {
-                      0: controller.text.toString(),
-                      1: int.parse(people.text.toString())
-                    };
+                    Data.myhotel = controller.text.toString();
+                    Data.maxpeople = people.text.toString();
+                    addUserData();
                   },
                   replace: HomePage(),
                 )

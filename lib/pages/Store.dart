@@ -1,8 +1,11 @@
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firestore_project/Authentication/auth.dart';
+import 'package:firestore_project/database.dart';
 import 'package:firestore_project/pages/QRCodeGenerator.dart';
 import 'package:flutter/material.dart';
 import 'package:barcode_widget/barcode_widget.dart';
 import '../Components/Button.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Store extends StatefulWidget {
   @override
@@ -10,6 +13,50 @@ class Store extends StatefulWidget {
 }
 
 class _StoreState extends State<Store> {
+  // dynamic hotelInfo = "";
+  Future<void> getUser() async {
+    FirebaseFirestore.instance.collection("users").where('mail', isEqualTo : Data.useremail)
+        .get().then((querySnapshot) {
+      querySnapshot.docs.forEach((result) {
+          setState(() {
+            Data.myhotel = result.data()['myhotel'];
+            Data.maxpeople = result.data()['accum'];
+          });
+      });
+    }
+    );
+    // DocumentSnapshot<Map<String, dynamic>> mydoc = await FirebaseFirestore
+    //     .instance
+    //     .collection('users')
+    //     .doc(Data.useremail)
+    //     .get();
+
+    // print(mydoc);
+
+    // WidgetsBinding.instance!.addPostFrameCallback((_) {
+    //   Navigator.of(context).pushNamed(
+    //     "/store",
+    //   );
+    // });
+  }
+
+  void initState() {
+    super.initState();
+    getUser();
+  }
+
+  Future<void> deleteUserData() async {
+    FirebaseFirestore.instance.collection('users').doc(Data.useremail).set(
+      {
+        "accum": "",
+        "myhotel": "",
+      },
+      SetOptions(merge: true),
+    ).then((value) => {
+          setState(() => {Data.myhotel = "", Data.maxpeople = ""})
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +72,7 @@ class _StoreState extends State<Store> {
       ),
       body: ListView(
         children: [
-          store[0] == ""
+          Data.myhotel == ""
               ? Column(
                   children: [
                     Center(
@@ -33,7 +80,7 @@ class _StoreState extends State<Store> {
                       "No Store Found!!",
                       style: TextStyle(color: Colors.white),
                     )),
-                    Button(title: "Create Your Store", push: QRCodeGenerator())
+                    Button(title: "Create Your Store", push: QRCodeGenerator()),
                   ],
                 )
               : Column(
@@ -51,14 +98,14 @@ class _StoreState extends State<Store> {
                             children: [
                               Center(
                                   child: Text(
-                                "Store Name : ${store[0]}",
+                                "Store Name : ${Data.myhotel}",
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 20),
                               )),
                               SizedBox(height: 20),
                               Center(
                                   child: Text(
-                                "Person Count : ${store[1]}",
+                                "Person Count : ${Data.maxpeople}",
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 18),
                               )),
@@ -77,7 +124,7 @@ class _StoreState extends State<Store> {
                     BarcodeWidget(
                       barcode: Barcode.qrCode(),
                       color: Colors.white,
-                      data: store[0],
+                      data: Data.myhotel,
                       width: 200,
                       height: 200,
                     ),
@@ -87,12 +134,7 @@ class _StoreState extends State<Store> {
                       children: [
                         Button(
                             title: "Remove The Store",
-                            press: () => {
-                                  setState(() {
-                                    store[0] = "";
-                                    store[1] = 0;
-                                  })
-                                }),
+                            press: () => {deleteUserData()}),
                         Button(
                           title: "Update Your Data",
                           push: QRCodeGenerator(),

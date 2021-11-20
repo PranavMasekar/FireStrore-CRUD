@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../Components/Button.dart';
 import '../database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'home.dart';
 
 class VisitStore extends StatefulWidget {
@@ -11,6 +12,23 @@ class VisitStore extends StatefulWidget {
 class _VisitStoreState extends State<VisitStore> {
   final count = 5;
   final waiting = 7;
+
+  Future<void> cancel() async {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(Data.useremail)
+        .set(
+      {
+        "mail": Data.useremail,
+        "hotel": "",
+      },
+      SetOptions(merge: true),
+    ).then((value) => {
+              setState(() {
+                Data.hotelname = "";
+              })
+            });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +47,7 @@ class _VisitStoreState extends State<VisitStore> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              'kya chahiye',
+              '${Data.hotelname}',
               style: TextStyle(color: Colors.white, fontSize: 30),
             ),
           ),
@@ -42,45 +60,46 @@ class _VisitStoreState extends State<VisitStore> {
           ),
           Button(
             title: "DONE",
+            press: () => {cancel()},
             replace: HomePage(),
           ),
-          Text(
-            "Store Name : ${Data.hotelname}",
-            style: TextStyle(color: Colors.white, fontSize: 18),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Button(title: "Stay in Queue"),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      primary: Color(0xff0cecda),
-                      shape: new RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(30.0),
-                      )),
-                  onPressed: () {
-                    // Validate returns true if the form is valid, otherwise false.
+          // Text(
+          //   "Store Name : ${Data.hotelname}",
+          //   style: TextStyle(color: Colors.white, fontSize: 18),
+          // ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.center,
+          //   children: [
+          //     // Padding(
+          //     //   padding: const EdgeInsets.all(8.0),
+          //     //   child: Button(title: "Stay in Queue"),
+          //     // ),
+          //     // Padding(
+          //     //   padding: const EdgeInsets.all(8.0),
+          //     //   child: ElevatedButton(
+          //     //     style: ElevatedButton.styleFrom(
+          //     //         primary: Color(0xff0cecda),
+          //     //         shape: new RoundedRectangleBorder(
+          //     //           borderRadius: new BorderRadius.circular(30.0),
+          //     //         )),
+          //     //     onPressed: () {
+          //     //       // Validate returns true if the form is valid, otherwise false.
 
-                    WidgetsBinding.instance!.addPostFrameCallback((_) {
-                      Navigator.pushReplacementNamed(
-                        context,
-                        "/home",
-                      );
-                    });
-                  },
-                  child: Text(
-                    'Leave the queue',
-                    style: TextStyle(fontSize: 18.0, color: Colors.black),
-                  ),
-                ),
-              ),
-            ],
-          )
+          //     //       WidgetsBinding.instance!.addPostFrameCallback((_) {
+          //     //         Navigator.pushReplacementNamed(
+          //     //           context,
+          //     //           "/home",
+          //     //         );
+          //     //       });
+          //     //     },
+          //     //     child: Text(
+          //     //       'Leave the queue',
+          //     //       style: TextStyle(fontSize: 18.0, color: Colors.black),
+          //     //     ),
+          //     //   ),
+          //     // ),
+          //   ],
+          // )
         ],
       ),
     );

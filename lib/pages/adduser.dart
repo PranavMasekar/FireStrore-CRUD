@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../database.dart';
 import 'home.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 
 class AddUser extends StatefulWidget {
   @override
@@ -33,6 +34,28 @@ class _AddUserState extends State<AddUser> {
     numbercontrl.clear();
     dosecontrl.clear();
   }
+
+  // final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  // late Future<int> _counter;
+
+  // Future<void> _incrementCounter() async {
+  //   final SharedPreferences prefs = await _prefs;
+  //   final int counter = (prefs.getInt('counter') ?? 0) + 1;
+
+  //   setState(() {
+  //     _counter = prefs.setInt('counter', counter).then((bool success) {
+  //       return counter;
+  //     });
+  //   });
+  // }
+
+  // void initState() {
+  //   super.initState();
+  //   _counter = _prefs.then((SharedPreferences prefs) {
+  //     return prefs.getInt('counter') ?? 0;
+  //   });
+  // }
+
 
   @override
   Widget build(BuildContext context) {

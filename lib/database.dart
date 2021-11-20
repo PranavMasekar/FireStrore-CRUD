@@ -6,5 +6,6 @@ class Data {
   static String username = "";
   static String userimgurl = "";
   static String useremail = "";
+  static String myhotel = "";
   static String maxpeople = "";
 }

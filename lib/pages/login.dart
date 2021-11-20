@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firestore_project/Authentication/auth.dart';
 import 'package:firestore_project/pages/adduser.dart';
+import 'package:firestore_project/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 
@@ -30,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => AddUser(),
+            builder: (context) => HomePage(),
           ),
         );
       });
@@ -46,6 +47,8 @@ class _LoginPageState extends State<LoginPage> {
     checkuserlog();
   }
 
+  
+
   signInMethod(context) async {
     await signin();
     final FirebaseAuth auth = FirebaseAuth.instance;
@@ -56,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => AddUser(),
+        builder: (context) => HomePage(),
       ),
     );
   }
