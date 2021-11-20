@@ -75,7 +75,7 @@ class _VisitStoreState extends State<VisitStore> {
                   },
                   child: Text(
                     'Leave the queue',
-                    style: TextStyle(fontSize: 18.0),
+                    style: TextStyle(fontSize: 18.0, color: Colors.black),
                   ),
                 ),
               ),

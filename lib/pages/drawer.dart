@@ -3,6 +3,7 @@ import 'package:firestore_project/pages/Store.dart';
 import 'package:flutter/material.dart';
 import 'package:firestore_project/pages/login.dart';
 import '../Components/Button.dart';
+import '../database.dart';
 
 class MyDrawer extends StatelessWidget {
   signOutMethod(context) async {
@@ -29,13 +30,13 @@ class MyDrawer extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 50,
-                backgroundImage: NetworkImage(imgurl),
+                backgroundImage: NetworkImage(Data.userimgurl),
               ),
               SizedBox(
                 height: 15,
               ),
               Text(
-                "$name ",
+                "${Data.username} ",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 18,
@@ -45,7 +46,7 @@ class MyDrawer extends StatelessWidget {
                 height: 15,
               ),
               Text(
-                "$email ",
+                "${Data.useremail} ",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 15,

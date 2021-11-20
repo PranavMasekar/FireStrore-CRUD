@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firestore_project/Authentication/auth.dart';
 import 'package:firestore_project/Components/Button.dart';
-import 'package:firestore_project/pages/waiting.dart';
+// import 'package:firestore_project/pages/waiting.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import '../database.dart';
@@ -15,41 +13,40 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Future<void> addUser(String myname, String number, String doses, int x,
-      String hotelname) async {
-    CollectionReference data = FirebaseFirestore.instance.collection(hotelname);
-    x = 3;
-    if (x < 5) {
-      data
-          .add({
-            'name': myname,
-            'number': number,
-            'doses': doses,
-          })
-          .then((value) => print('User Added'))
-          .onError(
-            (error, stackTrace) => print("Error"),
-          );
-      WidgetsBinding.instance!.addPostFrameCallback((_) {
-        Navigator.of(context).pushNamed(
-          "/store",
-        );
-      });
-    } else {
-      WidgetsBinding.instance!.addPostFrameCallback((_) {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => WaitingPage(store: qrcode),
-          ),
-        );
-      });
-    }
+  Future<void> addUser(int x) async {
+    DocumentSnapshot<Map<String, dynamic>> mydoc = await FirebaseFirestore
+        .instance
+        .collection('Hotel')
+        .doc(Data.hotelname)
+        .get();
+
+    print(mydoc.data()?["Customers"].length);
+
+    FirebaseFirestore.instance.collection('Hotels').doc(Data.hotelname).set(
+      {
+        "Customers": FieldValue.arrayUnion(
+          [
+            {
+              "name": Data.name,
+              "number": Data.number,
+              "doses": Data.doses,
+            },
+          ],
+        ),
+      },
+      SetOptions(merge: true),
+    ).then((value) => print("added"));
+    // WidgetsBinding.instance!.addPostFrameCallback((_) {
+    //   Navigator.of(context).pushNamed(
+    //     "/store",
+    //   );
+    // });
   }
 
-  late String qrcode;
+  String qrcode = "";
 
   final Stream<QuerySnapshot> studentStream =
-      FirebaseFirestore.instance.collection(Data.hotelname).snapshots();
+      FirebaseFirestore.instance.collection('Hotel Vista').snapshots();
 
   bool scanned = false;
   Future<void> scanQRCode() async {
@@ -151,12 +148,7 @@ class _HomePageState extends State<HomePage> {
                                                 ),
                                               ),
                                               onPressed: () {
-                                                addUser(
-                                                    Data.name,
-                                                    Data.number,
-                                                    Data.doses,
-                                                    store.length,
-                                                    Data.hotelname);
+                                                addUser(5);
                                               },
                                               child: Text(
                                                 "Visit The Store",

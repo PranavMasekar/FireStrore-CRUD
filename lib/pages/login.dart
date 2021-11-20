@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 
 import '../database.dart';
-import 'home.dart';
+// import 'home.dart';
 // import 'home.dart';
 
 class LoginPage extends StatefulWidget {
@@ -46,18 +46,19 @@ class _LoginPageState extends State<LoginPage> {
     checkuserlog();
   }
 
-  signInMethod() async {
-    // await signin();
-    if (await signin() != null) {
-      WidgetsBinding.instance!.addPostFrameCallback((_) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => AddUser(),
-          ),
-        );
-      });
-    }
+  signInMethod(context) async {
+    await signin();
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final user = auth.currentUser;
+    Data.username = user!.displayName.toString();
+    Data.useremail = user.email.toString();
+    Data.userimgurl = user.photoURL.toString();
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => AddUser(),
+      ),
+    );
   }
 
   @override
@@ -69,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                    child: Text("Shotro App",
+                    child: Text("Safe Restro",
                         style: TextStyle(color: Colors.white, fontSize: 40))),
                 SizedBox(height: 50),
                 Container(
@@ -82,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                       borderRadius: new BorderRadius.circular(5.0),
                     ),
                     onPressed: () {
-                      signInMethod();
+                      signInMethod(context);
                     },
                   ),
                 ),

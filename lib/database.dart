@@ -1,9 +1,10 @@
 class Data {
-  static late String name;
-  static late String number;
-  static late String doses;
-  static late String hotelname;
-  static late String username;
-  static late String userimgurl;
-  static late String useremail;
+  static String name = "";
+  static String number = "";
+  static String doses = "";
+  static String hotelname = "";
+  static String username = "";
+  static String userimgurl = "";
+  static String useremail = "";
+  static String maxpeople = "";
 }
