@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firestore_project/Components/Button.dart';
 import 'package:firestore_project/pages/VisitStore.dart';
+import 'package:firestore_project/pages/waiting.dart';
 // import 'package:firestore_project/pages/waiting.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
@@ -13,39 +15,60 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Future<void> addUser(int x) async {
-    DocumentSnapshot<Map<String, dynamic>> mydoc = await FirebaseFirestore
-        .instance
-        .collection('Hotel')
-        .doc(Data.hotelname)
-        .get();
-
-    print(mydoc.data()?["Customers"].length);
-
-    await FirebaseFirestore.instance
-        .collection('Hotels')
-        .doc(Data.hotelname)
-        .set(
-      {
-        "Customers": FieldValue.arrayUnion(
-          [
-            {"email": Data.useremail},
-          ],
-        ),
-      },
+  int count = 0;
+  Future<void> addUser(context) async {
+    FirebaseFirestore.instance.collection("Hotels").doc(Data.hotelname).set(
+      {},
       SetOptions(merge: true),
-    ).then((value) => print("added"));
+    );
 
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(Data.useremail)
-        .set(
-      {
-        "mail": Data.useremail,
-        "hotel": Data.hotelname,
-      },
-      SetOptions(merge: true),
-    ).then((value) => print("added"));
+    if (count < Data.maxpeople) {
+      await FirebaseFirestore.instance
+          .collection('Hotels')
+          .doc(Data.hotelname)
+          .set(
+        {
+          "Customers": FieldValue.arrayUnion(
+            [
+              {
+                "id": FirebaseAuth.instance.currentUser!.uid,
+                // "email": Data.useremail
+              },
+            ],
+          ),
+        },
+        SetOptions(merge: true),
+      ).then((value) => print("added"));
+
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(Data.useremail)
+          .set(
+        {
+          "mail": Data.useremail,
+          "hotel": Data.hotelname,
+        },
+        SetOptions(merge: true),
+      ).then((value) => print("added"));
+      DocumentSnapshot<Map<String, dynamic>> mydoc =
+          await FirebaseFirestore.instance
+              .collection('Hotels')
+              .doc(Data.hotelname)
+              // .set({})
+              .get();
+      count = mydoc.data()?["Customers"].length;
+    } else {
+      WidgetsBinding.instance!.addPostFrameCallback((_) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => WaitingPage(
+              store: Data.hotelname,
+            ),
+          ),
+        );
+      });
+    }
   }
 
   String qrcode = "";
@@ -73,7 +96,7 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  Future<void> getHotel() async {
+  Future<void> getHotel(context) async {
     FirebaseFirestore.instance
         .collection("users")
         .where('mail', isEqualTo: Data.useremail)
@@ -96,7 +119,7 @@ class _HomePageState extends State<HomePage> {
 
   void initState() {
     super.initState();
-    getHotel();
+    getHotel(context);
   }
 
   @override
@@ -182,7 +205,7 @@ class _HomePageState extends State<HomePage> {
                                                 ),
                                               ),
                                               onPressed: () {
-                                                addUser(5);
+                                                addUser(context);
                                                 Navigator.of(context)
                                                     .pushReplacement(
                                                   MaterialPageRoute(

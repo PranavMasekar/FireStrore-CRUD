@@ -125,7 +125,7 @@ class _QRCodeGeneratorState extends State<QRCodeGenerator> {
                       () {},
                     );
                     Data.myhotel = controller.text.toString();
-                    Data.maxpeople = people.text.toString();
+                    Data.maxpeople = int.parse(people.text);
                     addUserData();
                   },
                   replace: HomePage(),

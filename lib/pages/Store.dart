@@ -15,16 +15,18 @@ class Store extends StatefulWidget {
 class _StoreState extends State<Store> {
   // dynamic hotelInfo = "";
   Future<void> getUser() async {
-    FirebaseFirestore.instance.collection("users").where('mail', isEqualTo : Data.useremail)
-        .get().then((querySnapshot) {
+    FirebaseFirestore.instance
+        .collection("users")
+        .where('mail', isEqualTo: Data.useremail)
+        .get()
+        .then((querySnapshot) {
       querySnapshot.docs.forEach((result) {
-          setState(() {
-            Data.myhotel = result.data()['myhotel'];
-            Data.maxpeople = result.data()['accum'];
-          });
+        setState(() {
+          Data.myhotel = result.data()['myhotel'];
+          Data.maxpeople = result.data()['accum'];
+        });
       });
-    }
-    );
+    });
     // DocumentSnapshot<Map<String, dynamic>> mydoc = await FirebaseFirestore
     //     .instance
     //     .collection('users')
@@ -53,7 +55,7 @@ class _StoreState extends State<Store> {
       },
       SetOptions(merge: true),
     ).then((value) => {
-          setState(() => {Data.myhotel = "", Data.maxpeople = ""})
+          setState(() => {Data.myhotel = "", Data.maxpeople = 1})
         });
   }
 

@@ -7,5 +7,5 @@ class Data {
   static String userimgurl = "";
   static String useremail = "";
   static String myhotel = "";
-  static String maxpeople = "";
+  static int maxpeople = 1;
 }

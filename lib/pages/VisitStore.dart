@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../Components/Button.dart';
 import '../database.dart';
@@ -23,11 +24,25 @@ class _VisitStoreState extends State<VisitStore> {
         "hotel": "",
       },
       SetOptions(merge: true),
-    ).then((value) => {
-              setState(() {
-                Data.hotelname = "";
-              })
-            });
+    ).then(
+      (value) => {
+        setState(
+          () {
+            Data.hotelname = "";
+          },
+        )
+      },
+    );
+  }
+
+  Future<void> deleteCustomer() async {
+    List val = [FirebaseAuth.instance.currentUser!.uid];
+    await FirebaseFirestore.instance
+        .collection('Hotels')
+        .doc(Data.hotelname)
+        .set({"Customers": FieldValue.arrayRemove(val)}).then(
+      (value) => print("Deleted"),
+    );
   }
 
   @override
@@ -60,7 +75,10 @@ class _VisitStoreState extends State<VisitStore> {
           ),
           Button(
             title: "DONE",
-            press: () => {cancel()},
+            press: () async {
+              await deleteCustomer();
+              cancel();
+            },
             replace: HomePage(),
           ),
           // Text(
