@@ -6,7 +6,7 @@ It uses Flutter Framework for Frontend and Backend and uses Firebase (Firestore)
 
 * The main motive of Safe Restro is to automate the process of getting access to enter a particular Hotel/Restaurant.
 
-* Try the [APK (Android)]() .
+* Try the [APK (Android)](https://drive.google.com/file/d/12np0o2VPd3TdwUEEoHqMxVkyAcDADfLS/view?usp=sharing) .
 
 ## ✨ Technologies Used
 
