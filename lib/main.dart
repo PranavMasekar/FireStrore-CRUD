@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
           title: 'FireStore',
           theme: ThemeData(
             textTheme:
-                GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
+                GoogleFonts.nunitoTextTheme(Theme.of(context).textTheme),
             primarySwatch: Colors.blue,
           ),
           debugShowCheckedModeBanner: false,
