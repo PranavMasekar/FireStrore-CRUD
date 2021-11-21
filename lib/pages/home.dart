@@ -15,14 +15,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int count = 0;
   Future<void> addUser(context) async {
     FirebaseFirestore.instance.collection("Hotels").doc(Data.hotelname).set(
       {},
       SetOptions(merge: true),
     );
 
-    if (count < Data.maxpeople) {
+    if (Data.count < Data.maxpeople) {
       await FirebaseFirestore.instance
           .collection('Hotels')
           .doc(Data.hotelname)
@@ -56,7 +55,7 @@ class _HomePageState extends State<HomePage> {
               .doc(Data.hotelname)
               // .set({})
               .get();
-      count = mydoc.data()?["Customers"].length;
+      Data.count = mydoc.data()?["Customers"].length;
     } else {
       WidgetsBinding.instance!.addPostFrameCallback((_) {
         Navigator.pushReplacement(

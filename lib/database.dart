@@ -8,4 +8,5 @@ class Data {
   static String useremail = "";
   static String myhotel = "";
   static int maxpeople = 1;
+  static int count = 0;
 }

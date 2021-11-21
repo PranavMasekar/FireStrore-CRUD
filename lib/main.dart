@@ -28,8 +28,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           title: 'FireStore',
           theme: ThemeData(
-            textTheme:
-                GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
+            textTheme: GoogleFonts.nunitoTextTheme(Theme.of(context).textTheme),
             primarySwatch: Colors.blue,
           ),
           debugShowCheckedModeBanner: false,

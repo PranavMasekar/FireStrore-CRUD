@@ -25,13 +25,7 @@ class _VisitStoreState extends State<VisitStore> {
       },
       // SetOptions(merge: true),
     ).then(
-      (value) => {
-        setState(
-          () {
-            Data.hotelname = "";
-          },
-        )
-      },
+      (value) => {Data.hotelname = ""},
     );
   }
 
@@ -40,18 +34,20 @@ class _VisitStoreState extends State<VisitStore> {
     await FirebaseFirestore.instance
         .collection('Hotels')
         .doc(Data.hotelname)
-        .set(
+        .update(
       {
         "Customers": FieldValue.arrayRemove(
           [
-            FirebaseAuth.instance.currentUser!.uid,
+            {
+              "id": FirebaseAuth.instance.currentUser!.uid,
+            }
           ],
         ),
       },
-      SetOptions(merge: true),
     ).then(
       (value) => print("Deleted"),
     );
+    Data.count--;
   }
 
   @override
