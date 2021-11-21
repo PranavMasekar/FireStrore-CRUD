@@ -18,12 +18,12 @@ class _VisitStoreState extends State<VisitStore> {
     await FirebaseFirestore.instance
         .collection('users')
         .doc(Data.useremail)
-        .set(
+        .update(
       {
         "mail": Data.useremail,
         "hotel": "",
       },
-      SetOptions(merge: true),
+      // SetOptions(merge: true),
     ).then(
       (value) => {
         setState(
@@ -36,11 +36,20 @@ class _VisitStoreState extends State<VisitStore> {
   }
 
   Future<void> deleteCustomer() async {
-    List val = [FirebaseAuth.instance.currentUser!.uid];
+    // List val = [FirebaseAuth.instance.currentUser!.uid];
     await FirebaseFirestore.instance
         .collection('Hotels')
         .doc(Data.hotelname)
-        .set({"Customers": FieldValue.arrayRemove(val)}).then(
+        .set(
+      {
+        "Customers": FieldValue.arrayRemove(
+          [
+            FirebaseAuth.instance.currentUser!.uid,
+          ],
+        ),
+      },
+      SetOptions(merge: true),
+    ).then(
       (value) => print("Deleted"),
     );
   }
