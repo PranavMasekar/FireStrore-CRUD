@@ -40,17 +40,17 @@ class _VisitStoreState extends State<VisitStore> {
         );
   }
 
-  Future<void> deleteCustomer() async {
-    List val = [FirebaseAuth.instance.currentUser!.uid];
-    await FirebaseFirestore.instance
-        .collection('Hotels')
-        .doc(Data.hotelname)
-        .update(
-      {"Customers": FieldValue.arrayRemove(val)},
-    ).then(
-      (value) => print("Deleted"),
-    );
-  }
+  // Future<void> deleteCustomer() async {
+  //   // List val = [FirebaseAuth.instance.currentUser!.uid];
+  //   await FirebaseFirestore.instance
+  //       .collection('Hotels')
+  //       .doc(Data.hotelname)
+  //       .update(
+  //     {"Customers": FieldValue.arrayRemove(val)},
+  //   ).then(
+  //     (value) => print("Deleted"),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {

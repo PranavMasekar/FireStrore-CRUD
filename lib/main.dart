@@ -3,6 +3,7 @@ import 'package:firestore_project/pages/VisitStore.dart';
 import 'package:firestore_project/pages/home.dart';
 import 'package:firestore_project/pages/login.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,6 +28,8 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           title: 'FireStore',
           theme: ThemeData(
+            textTheme:
+                GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
             primarySwatch: Colors.blue,
           ),
           debugShowCheckedModeBanner: false,
