@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firestore_project/Components/Button.dart';
 import 'package:firestore_project/pages/VisitStore.dart';
 import 'package:firestore_project/pages/waiting.dart';
@@ -18,72 +17,46 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final _advancedDrawerController = AdvancedDrawerController();
   Future<void> addUser(context) async {
-    getcurrent(context).then((_) => {
-          if (Data.currentpeople < Data.maxallowed)
-            {
-              FirebaseFirestore.instance
-                  .collection('Hotels')
-                  .doc(Data.hotelname)
-                  .update(
-                {"count": ++Data.currentpeople},
-              ).then((value) => {
-                        FirebaseFirestore.instance
-                            .collection('users')
-                            .doc(Data.useremail)
-                            .set(
-                          {
-                            "mail": Data.useremail,
-                            "hotel": Data.hotelname,
-                          },
-                          SetOptions(merge: true),
-                        ),
-                        Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) => VisitStore()),
-                        )
-                      })
-            }
-          else
-            {
-              WidgetsBinding.instance!.addPostFrameCallback((_) {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => WaitingPage(
-                      store: Data.hotelname,
-                    ),
+    getcurrent(context).then(
+      (_) => {
+        if (Data.currentpeople < Data.maxallowed)
+          {
+            FirebaseFirestore.instance
+                .collection('Hotels')
+                .doc(Data.hotelname)
+                .update(
+              {"count": ++Data.currentpeople},
+            ).then((value) => {
+                      FirebaseFirestore.instance
+                          .collection('users')
+                          .doc(Data.useremail)
+                          .set(
+                        {
+                          "mail": Data.useremail,
+                          "hotel": Data.hotelname,
+                        },
+                        SetOptions(merge: true),
+                      ),
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => VisitStore()),
+                      )
+                    })
+          }
+        else
+          {
+            WidgetsBinding.instance!.addPostFrameCallback((_) {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => WaitingPage(
+                    store: Data.hotelname,
                   ),
-                );
-              })
-            }
-
-          // await FirebaseFirestore.instance
-          //     .collection('Hotels')
-          //     .doc(Data.hotelname)
-          //     .set(
-          //   {
-          //     "count": ++noice,
-          //   },
-          //   SetOptions(merge: true),
-          // ).then((value) => print("added"));
-
-          // FirebaseFirestore.instance.collection('users').doc(Data.useremail).set(
-          //   {
-          //     "mail": Data.useremail,
-          //     "accum": Data.maxpeople,
-          //     "myhotel": Data.myhotel,
-          //   },
-          //   SetOptions(merge: true),
-          // ).then((value) => print("added"));
-
-          // DocumentSnapshot<Map<String, dynamic>> mydoc =
-          //     await FirebaseFirestore.instance
-          //         .collection('Hotels')
-          //         .doc(Data.hotelname)
-          //         // .set({})
-          //         .get();
-          // count = mydoc.data()?["Customers"].length;
-          //
-        });
+                ),
+              );
+            })
+          }
+      },
+    );
   }
 
   String qrcode = "";
@@ -116,19 +89,25 @@ class _HomePageState extends State<HomePage> {
         .collection("users")
         .where('mail', isEqualTo: Data.useremail)
         .get()
-        .then((querySnapshot) {
-      querySnapshot.docs.forEach((result) {
-        setState(() {
-          Data.hotelname = result.data()['hotel'];
-        });
-        if (Data.hotelname != "")
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute(
-              builder: (context) => VisitStore(),
-            ),
-          );
-      });
-    });
+        .then(
+      (querySnapshot) {
+        querySnapshot.docs.forEach(
+          (result) {
+            setState(
+              () {
+                Data.hotelname = result.data()['hotel'];
+              },
+            );
+            if (Data.hotelname != "")
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => VisitStore(),
+                ),
+              );
+          },
+        );
+      },
+    );
   }
 
   Future<void> getcurrent(context) async {
@@ -136,27 +115,29 @@ class _HomePageState extends State<HomePage> {
         .collection("Hotels")
         .where('name', isEqualTo: Data.hotelname)
         .get()
-        .then((querySnapshot) {
-      querySnapshot.docs.forEach((result) {
-        setState(() {
-          Data.currentpeople = result.data()['count'];
-          Data.maxallowed = result.data()['max'];
-        });
-        // if (Data.hotelname != "")
-        //   Navigator.of(context).pushReplacement(
-        //     MaterialPageRoute(
-        //       builder: (context) => VisitStore(),
-        //     ),
-        //   );
-      });
-    });
+        .then(
+      (querySnapshot) {
+        querySnapshot.docs.forEach(
+          (result) {
+            setState(
+              () {
+                Data.currentpeople = result.data()['count'];
+                Data.maxallowed = result.data()['max'];
+              },
+            );
+          },
+        );
+      },
+    );
   }
 
   void initState() {
     super.initState();
-    getHotel(context).then((_) {
-      // getcurrent(context);
-    });
+    getHotel(context).then(
+      (_) {
+        // getcurrent(context);
+      },
+    );
   }
 
   @override
@@ -202,7 +183,6 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  // Text(getCount().toString(),style: TextStyle(color: Colors.white),),
                   Column(
                     children: [
                       Container(
@@ -214,12 +194,6 @@ class _HomePageState extends State<HomePage> {
                           press: () => scanQRCode(),
                         ),
                       ),
-                      // Center(
-                      //   child: Button(
-                      //     title: 'Create QR Code',
-                      //     push: QRCodeGenerator(),
-                      //   ),
-                      // ),
                     ],
                   ),
                   Padding(
@@ -270,7 +244,7 @@ class _HomePageState extends State<HomePage> {
                                                 ),
                                               ),
                                               SizedBox(
-                                                width: 150,
+                                                width: 130,
                                                 child: Button(
                                                   title: 'Cancel',
                                                   press: () => {

@@ -1,7 +1,6 @@
 import 'package:firestore_project/pages/home.dart';
 import 'package:flutter/material.dart';
 import '../Components/Button.dart';
-import '../Authentication/auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../database.dart';
 
@@ -45,18 +44,6 @@ class _QRCodeGeneratorState extends State<QRCodeGenerator> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // controller.text == ""
-            //     ? Text(
-            //         "Add The Name of the Hotel",
-            //         style: TextStyle(color: Colors.white),
-            //       )
-            //     : BarcodeWidget(
-            //         barcode: Barcode.qrCode(),
-            //         color: Colors.white,
-            //         data: controller.text,
-            //         width: 200,
-            //         height: 200,
-            //       ),
             SizedBox(
               height: 40,
             ),

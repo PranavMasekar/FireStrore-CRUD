@@ -10,8 +10,6 @@ class WaitingPage extends StatefulWidget {
 }
 
 class _WaitingPageState extends State<WaitingPage> {
-  final count = 5;
-  final waiting = 7;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,12 +34,15 @@ class _WaitingPageState extends State<WaitingPage> {
           ),
           Container(child: Image.asset('assets/1.png')),
           Text(
-            "Maximum Store Member Count : $count",
-            style: TextStyle(color: Colors.white, fontSize: 18),
+            "Currently Hotel is full pls wait for some time",
+            style: TextStyle(color: Colors.white, fontSize: 15),
+          ),
+          SizedBox(
+            height: 10,
           ),
           Text(
-            "Current Waiting People : $waiting",
-            style: TextStyle(color: Colors.white, fontSize: 18),
+            "OR",
+            style: TextStyle(color: Colors.white, fontSize: 15),
           ),
           Padding(
               padding: const EdgeInsets.all(8.0),

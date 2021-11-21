@@ -1,13 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firestore_project/Authentication/auth.dart';
-import 'package:firestore_project/pages/adduser.dart';
 import 'package:firestore_project/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
-
 import '../database.dart';
-// import 'home.dart';
-// import 'home.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -47,8 +43,6 @@ class _LoginPageState extends State<LoginPage> {
     checkuserlog();
   }
 
-  
-
   signInMethod(context) async {
     await signin();
     final FirebaseAuth auth = FirebaseAuth.instance;
@@ -73,8 +67,11 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                    child: Text("Safe Restro",
-                        style: TextStyle(color: Colors.white, fontSize: 40))),
+                  child: Text(
+                    "Safe Restro",
+                    style: TextStyle(color: Colors.white, fontSize: 40),
+                  ),
+                ),
                 SizedBox(height: 50),
                 Container(
                   child: Image.asset('assets/2.png'),
