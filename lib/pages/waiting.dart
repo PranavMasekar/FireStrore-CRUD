@@ -36,13 +36,24 @@ class _WaitingPageState extends State<WaitingPage> {
           ),
           Container(child: Image.asset('assets/1.png')),
           Text(
-            "Maximum Store Member Count : $count",
-            style: TextStyle(color: Colors.white, fontSize: 18),
+            "Currently Hotel is full pls wait for some time",
+            style: TextStyle(color: Colors.white, fontSize: 15),
+          ),
+          SizedBox(
+            height: 10,
           ),
           Text(
-            "Current Waiting People : $waiting",
-            style: TextStyle(color: Colors.white, fontSize: 18),
+            "OR",
+            style: TextStyle(color: Colors.white, fontSize: 15),
           ),
+          // Text(
+          //   "Maximum Store Member Count : $count",
+          //   style: TextStyle(color: Colors.white, fontSize: 18),
+          // ),
+          // Text(
+          //   "Current Waiting People : $waiting",
+          //   style: TextStyle(color: Colors.white, fontSize: 18),
+          // ),
           Padding(
               padding: const EdgeInsets.all(8.0),
               child: Button(title: "Leave the Queue", push: HomePage()))

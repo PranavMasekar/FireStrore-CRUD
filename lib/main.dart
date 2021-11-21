@@ -26,18 +26,18 @@ class MyApp extends StatelessWidget {
           return CircularProgressIndicator();
         }
         return MaterialApp(
-          title: 'FireStore',
-          theme: ThemeData(
-            textTheme: GoogleFonts.nunitoTextTheme(Theme.of(context).textTheme),
-            primarySwatch: Colors.blue,
-          ),
-          debugShowCheckedModeBanner: false,
-          routes: {
-            "/home": (context) => HomePage(),
-            "/store": (context) => VisitStore(),
-          },
-          home: LoginPage(),
-        );
+            title: 'FireStore',
+            theme: ThemeData(
+              textTheme:
+                  GoogleFonts.nunitoTextTheme(Theme.of(context).textTheme),
+              primarySwatch: Colors.blue,
+            ),
+            debugShowCheckedModeBanner: false,
+            routes: {
+              "/home": (context) => HomePage(),
+              "/store": (context) => VisitStore(),
+            },
+            home: LoginPage());
       },
     );
   }
