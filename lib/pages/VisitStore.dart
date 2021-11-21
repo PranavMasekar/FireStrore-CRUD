@@ -11,28 +11,33 @@ class VisitStore extends StatefulWidget {
 }
 
 class _VisitStoreState extends State<VisitStore> {
-  final count = 5;
-  final waiting = 7;
-
   Future<void> cancel() async {
     await FirebaseFirestore.instance
         .collection('users')
         .doc(Data.useremail)
         .set(
-      {
-        "mail": Data.useremail,
-        "hotel": "",
-      },
-      SetOptions(merge: true),
-    ).then(
-      (value) => {
-        setState(
-          () {
-            Data.hotelname = "";
+          {
+            "mail": Data.useremail,
+            "hotel": "",
           },
+          SetOptions(merge: true),
         )
-      },
-    );
+        .then((_) => {
+              print(Data.hotelname),
+              FirebaseFirestore.instance
+                  .collection('Hotels')
+                  .doc(Data.hotelname)
+                  .update({"count": --Data.currentpeople})
+            })
+        .then(
+          (value) => {
+            setState(
+              () {
+                Data.hotelname = "";
+              },
+            )
+          },
+        );
   }
 
   Future<void> deleteCustomer() async {
@@ -40,7 +45,9 @@ class _VisitStoreState extends State<VisitStore> {
     await FirebaseFirestore.instance
         .collection('Hotels')
         .doc(Data.hotelname)
-        .set({"Customers": FieldValue.arrayRemove(val)}).then(
+        .update(
+      {"Customers": FieldValue.arrayRemove(val)},
+    ).then(
       (value) => print("Deleted"),
     );
   }
@@ -75,8 +82,9 @@ class _VisitStoreState extends State<VisitStore> {
           ),
           Button(
             title: "DONE",
-            press: () async {
-              await deleteCustomer();
+            press: () {
+              // Data.hotelname = "";
+              // await deleteCustomer();
               cancel();
             },
             replace: HomePage(),

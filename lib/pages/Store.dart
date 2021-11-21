@@ -1,4 +1,3 @@
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firestore_project/Authentication/auth.dart';
 import 'package:firestore_project/database.dart';
 import 'package:firestore_project/pages/QRCodeGenerator.dart';

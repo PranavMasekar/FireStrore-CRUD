@@ -19,7 +19,11 @@ class _QRCodeGeneratorState extends State<QRCodeGenerator> {
         "myhotel": Data.myhotel,
       },
       SetOptions(merge: true),
-    ).then((value) => print("added"));
+    ).then((value) => {
+          FirebaseFirestore.instance.collection('Hotels').doc(Data.myhotel).set(
+            {"count": 0, "name": Data.myhotel, "max": Data.maxpeople},
+          ).then((value) => print("added"))
+        });
   }
 
   TextEditingController controller = TextEditingController();
