@@ -1,29 +1,20 @@
 // ignore_for_file: avoid_print, non_constant_identifier_names, unused_field
-
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_web_auth/flutter_web_auth.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
 
-void main() => runApp(const MyApp());
+void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
-
   @override
   _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
   String _status = '';
-  @override
-  void initState() {
-    super.initState();
-  }
-
   void authenticate(String URL) async {
     const callbackUrlScheme = "pranavapp.page.link";
     try {
