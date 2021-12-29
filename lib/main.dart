@@ -1,10 +1,12 @@
 // ignore_for_file: avoid_print, non_constant_identifier_names, unused_field
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_web_auth/flutter_web_auth.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
+import 'package:uni_links/uni_links.dart';
 
 void main() => runApp(MyApp());
 
@@ -14,7 +16,18 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  Uri? _initialUri;
+  Uri? _latestUri;
+  Object? _err;
+  StreamSubscription? _sub;
   String _status = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _handleIncomingLinks();
+  }
+
   void authenticate(String URL) async {
     const callbackUrlScheme = "pranavapp.page.link";
     try {
@@ -25,6 +38,32 @@ class _MyAppState extends State<MyApp> {
     } on PlatformException catch (e) {
       setState(() {
         _status = 'Got error: $e';
+      });
+    }
+  }
+
+  void _handleIncomingLinks() {
+    if (!kIsWeb) {
+      // It will handle app links while the app is already started - be it in
+      // the foreground or in the background.
+      _sub = uriLinkStream.listen((Uri? uri) {
+        if (!mounted) return;
+        print('got uri: $uri');
+        setState(() {
+          _latestUri = uri;
+          _err = null;
+        });
+      }, onError: (Object err) {
+        if (!mounted) return;
+        print('got err: $err');
+        setState(() {
+          _latestUri = null;
+          if (err is FormatException) {
+            _err = err;
+          } else {
+            _err = null;
+          }
+        });
       });
     }
   }
