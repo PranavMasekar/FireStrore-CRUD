@@ -1,14 +1,20 @@
 // ignore_for_file: avoid_print, non_constant_identifier_names, unused_field
-import 'dart:convert';
-import 'package:flutter/foundation.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firestore_project/Testing%20folder/testhome.dart';
+import 'package:firestore_project/database.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_web_auth/flutter_web_auth.dart';
+import 'package:flutter_signin_button/button_list.dart';
+import 'package:flutter_signin_button/button_view.dart';
 import 'dart:async';
-import 'package:http/http.dart' as http;
-import 'package:uni_links/uni_links.dart';
 
-void main() => runApp(MyApp());
+import 'Authentication/auth.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
+}
 
 class MyApp extends StatefulWidget {
   @override
@@ -16,87 +22,78 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  Uri? _initialUri;
-  Uri? _latestUri;
-  Object? _err;
-  StreamSubscription? _sub;
-  String _status = '';
-
-  @override
-  void initState() {
-    super.initState();
-    _handleIncomingLinks();
-  }
-
-  void authenticate(String URL) async {
-    const callbackUrlScheme = "pranavapp.page.link";
-    try {
-      final result = await FlutterWebAuth.authenticate(
-          url: URL, callbackUrlScheme: callbackUrlScheme);
-      final code = Uri.parse(result).queryParameters['code'];
-      print(code);
-    } on PlatformException catch (e) {
-      setState(() {
-        _status = 'Got error: $e';
-      });
-    }
-  }
-
-  void _handleIncomingLinks() {
-    if (!kIsWeb) {
-      // It will handle app links while the app is already started - be it in
-      // the foreground or in the background.
-      _sub = uriLinkStream.listen((Uri? uri) {
-        if (!mounted) return;
-        print('got uri: $uri');
-        setState(() {
-          _latestUri = uri;
-          _err = null;
-        });
-      }, onError: (Object err) {
-        if (!mounted) return;
-        print('got err: $err');
-        setState(() {
-          _latestUri = null;
-          if (err is FormatException) {
-            _err = err;
-          } else {
-            _err = null;
-          }
-        });
-      });
-    }
-  }
-
-  Future<void> get_request() async {
-    var url = Uri.parse(
-        "http://913d-2401-4900-5033-eb92-1d68-513b-3715-5571.ngrok.io/auth/o/google-oauth2/?redirect_uri=http://913d-2401-4900-5033-eb92-1d68-513b-3715-5571.ngrok.io");
-    var response = await http.get(url);
-    Map data = jsonDecode(response.body);
-    print(data["authorization_url"]);
-    authenticate(data["authorization_url"]);
-  }
+  final Future<FirebaseApp> _initilization = Firebase.initializeApp();
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Web Auth example'),
-        ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const SizedBox(height: 80),
-              ElevatedButton(
-                child: const Text('Authenticate'),
-                onPressed: () {
-                  get_request();
-                },
-              ),
-            ],
+      home: MYHOME(),
+    );
+  }
+}
+
+class MYHOME extends StatefulWidget {
+  const MYHOME({Key? key}) : super(key: key);
+
+  @override
+  State<MYHOME> createState() => _MYHOMEState();
+}
+
+class _MYHOMEState extends State<MYHOME> {
+  Future<void> checkuserlog() async {
+    dynamic loading = "";
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final user = auth.currentUser;
+    print(user);
+    if (user != null) {
+      setState(() {
+        Data.username = user.displayName.toString();
+        Data.useremail = user.email.toString();
+        Data.userimgurl = user.photoURL.toString();
+        loading = true;
+      });
+      WidgetsBinding.instance!.addPostFrameCallback((_) {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => TestHome()));
+      });
+    } else {
+      setState(() {
+        loading = false;
+      });
+    }
+  }
+
+  void initState() {
+    super.initState();
+    checkuserlog();
+  }
+
+  signInMethod(context) async {
+    await signin();
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final user = auth.currentUser;
+    Data.username = user!.displayName.toString();
+    Data.useremail = user.email.toString();
+    Data.userimgurl = user.photoURL.toString();
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => TestHome()));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Web Auth example'),
+      ),
+      body: Center(
+        child: SignInButton(
+          Buttons.Google,
+          shape: new RoundedRectangleBorder(
+            borderRadius: new BorderRadius.circular(5.0),
           ),
+          onPressed: () {
+            signInMethod(context);
+          },
         ),
       ),
     );
