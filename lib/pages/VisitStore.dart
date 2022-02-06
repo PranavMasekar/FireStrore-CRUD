@@ -12,7 +12,7 @@ class VisitStore extends StatefulWidget {
 
 class _VisitStoreState extends State<VisitStore> {
   final count = 5;
-  final waiting = 7;
+  final waiting = 10;
 
   Future<void> cancel() async {
     await FirebaseFirestore.instance
